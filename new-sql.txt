@@ -1,0 +1,541 @@
+-- phpMyAdmin SQL Dump
+-- version 4.7.4
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: May 31, 2019 at 04:09 AM
+-- Server version: 10.1.28-MariaDB
+-- PHP Version: 5.6.32
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `v_productivity`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `p_users`
+--
+
+CREATE TABLE `p_users` (
+  `userId` int(11) NOT NULL,
+  `Name` varchar(100) NOT NULL,
+  `userName` varchar(100) NOT NULL,
+  `password` varchar(100) NOT NULL,
+  `userType` smallint(2) NOT NULL,
+  `userStatus` tinyint(1) NOT NULL DEFAULT '1',
+  `createdBy` int(11) NOT NULL,
+  `project` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `p_users`
+--
+
+INSERT INTO `p_users` (`userId`, `Name`, `userName`, `password`, `userType`, `userStatus`, `createdBy`, `project`) VALUES
+(2, 'Admin', 'admin', '0192023a7bbd73250516f069df18b500', 1, 1, 0, 0),
+(3, 'jeeva', 'storeman', 'c6f929f8c30078248c2a2151be9f0f39', 3, 1, 0, 0),
+(4, 'driver', 'driver', '703b02a2a8bb363f50386bb338892471', 4, 1, 0, 0),
+(5, 'super', 'super', 'f35364bc808b079853de5a1e343e7159', 5, 1, 0, 3),
+(6, 'Super 2', 'Super2', 'affc43cb08a4fd1d9b27fae06b3c57cd', 5, 1, 0, 5),
+(7, 'jeeva', 'ssjeeva', 'e8717e52966964f14a532ba011503c64', 5, 1, 0, 4),
+(8, 'driver2', 'driver2', '703b02a2a8bb363f50386bb338892471', 4, 1, 0, 0),
+(9, 'super 3', 'super3', '85511dc944c3765338deb0b3ad38e907', 5, 1, 0, 3),
+(11, 'super 4', 'super4', 'be3878a397a68ac10c4ef8727baa3b7d', 5, 1, 0, 4);
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `p_users`
+--
+ALTER TABLE `p_users`
+  ADD PRIMARY KEY (`userId`),
+  ADD KEY `userName` (`userName`,`password`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `p_users`
+--
+ALTER TABLE `p_users`
+  MODIFY `userId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+
+-- phpMyAdmin SQL Dump
+-- version 4.7.4
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: May 31, 2019 at 04:09 AM
+-- Server version: 10.1.28-MariaDB
+-- PHP Version: 5.6.32
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `v_productivity`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `p_workers`
+--
+
+CREATE TABLE `p_workers` (
+  `workerId` int(11) NOT NULL,
+  `workerName` varchar(100) NOT NULL,
+  `teamId` int(11) NOT NULL,
+  `createdOn` datetime NOT NULL,
+  `createdBy` int(11) NOT NULL,
+  `modifiedOn` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
+  `status` tinyint(1) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `p_workers`
+--
+
+INSERT INTO `p_workers` (`workerId`, `workerName`, `teamId`, `createdOn`, `createdBy`, `modifiedOn`, `status`) VALUES
+(1, 'worker1', 1, '2019-03-02 00:00:00', 1, '0000-00-00 00:00:00', 1),
+(2, 'worker2', 1, '2019-03-02 00:00:00', 1, '0000-00-00 00:00:00', 1),
+(3, 'worker3', 2, '2019-03-14 00:00:00', 1, '2019-04-23 13:11:24', 1),
+(4, 'worker4', 1, '2019-04-13 00:00:00', 1, '0000-00-00 00:00:00', 1),
+(5, 'worker5', 2, '2019-04-13 00:00:00', 1, '2019-04-23 13:13:37', 1),
+(6, 'worker6', 2, '2019-04-13 00:00:00', 1, '2019-04-23 13:13:37', 1),
+(7, 'worker7', 3, '2019-04-13 00:00:00', 1, '2019-04-23 13:15:03', 1),
+(8, 'worker8', 3, '2019-04-13 00:00:00', 1, '2019-04-23 13:15:03', 1),
+(9, 'worker9', 4, '2019-04-13 00:00:00', 1, '2019-04-23 13:15:03', 1),
+(10, 'worker10', 4, '2019-04-13 00:00:00', 1, '2019-04-23 13:15:03', 1);
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `p_workers`
+--
+ALTER TABLE `p_workers`
+  ADD PRIMARY KEY (`workerId`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `p_workers`
+--
+ALTER TABLE `p_workers`
+  MODIFY `workerId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+
+
+-- phpMyAdmin SQL Dump
+-- version 4.7.4
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: May 31, 2019 at 04:10 AM
+-- Server version: 10.1.28-MariaDB
+-- PHP Version: 5.6.32
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `v_productivity`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `p_workerteam`
+--
+
+CREATE TABLE `p_workerteam` (
+  `teamid` int(11) NOT NULL,
+  `teamName` varchar(100) NOT NULL,
+  `createdOn` datetime NOT NULL,
+  `status` tinyint(4) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `p_workerteam`
+--
+
+INSERT INTO `p_workerteam` (`teamid`, `teamName`, `createdOn`, `status`) VALUES
+(1, 'CW', '2019-04-23 00:00:00', 1),
+(2, 'Team1', '2019-04-23 00:00:00', 1),
+(3, 'Team2', '2019-04-23 00:00:00', 1),
+(4, 'SW', '2019-04-23 00:00:00', 1);
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `p_workerteam`
+--
+ALTER TABLE `p_workerteam`
+  ADD PRIMARY KEY (`teamid`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `p_workerteam`
+--
+ALTER TABLE `p_workerteam`
+  MODIFY `teamid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+
+-- phpMyAdmin SQL Dump
+-- version 4.7.4
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: May 31, 2019 at 04:10 AM
+-- Server version: 10.1.28-MariaDB
+-- PHP Version: 5.6.32
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `v_productivity`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `p_scaffoldtype`
+--
+
+CREATE TABLE `p_scaffoldtype` (
+  `id` int(11) NOT NULL,
+  `scaffoldName` varchar(100) NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `p_scaffoldtype`
+--
+
+INSERT INTO `p_scaffoldtype` (`id`, `scaffoldName`, `status`) VALUES
+(1, 'Tower', 1),
+(2, 'Perimeter', 1),
+(3, 'Cantilever', 1),
+(4, 'Mobile', 1),
+(5, 'Birdcage', 1),
+(6, 'Hanging', 1),
+(7, 'Lift Shaft', 1),
+(8, 'Truss Out', 1),
+(9, 'Cantilever I.Beam', 1),
+(10, 'Cantilever T.Bracket', 1);
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `p_scaffoldtype`
+--
+ALTER TABLE `p_scaffoldtype`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `p_scaffoldtype`
+--
+ALTER TABLE `p_scaffoldtype`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+
+
+-- phpMyAdmin SQL Dump
+-- version 4.7.4
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: May 31, 2019 at 04:11 AM
+-- Server version: 10.1.28-MariaDB
+-- PHP Version: 5.6.32
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `v_productivity`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `p_projects`
+--
+
+CREATE TABLE `p_projects` (
+  `projectId` int(11) NOT NULL,
+  `projectName` varchar(100) NOT NULL,
+  `projectStatus` tinyint(1) NOT NULL DEFAULT '1',
+  `modifiedOn` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `createdBy` int(11) NOT NULL,
+  `createdOn` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `p_projects`
+--
+
+INSERT INTO `p_projects` (`projectId`, `projectName`, `projectStatus`, `modifiedOn`, `createdBy`, `createdOn`) VALUES
+(3, 'project5', 1, '2018-04-29 05:06:33', 2, '2018-04-29 00:00:00'),
+(4, 'project2', 1, '2018-04-29 05:06:33', 2, '2018-04-29 00:00:00'),
+(5, 'project 3', 1, '2018-09-29 18:35:06', 0, '0000-00-00 00:00:00');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `p_projects`
+--
+ALTER TABLE `p_projects`
+  ADD PRIMARY KEY (`projectId`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `p_projects`
+--
+ALTER TABLE `p_projects`
+  MODIFY `projectId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+
+
+-- phpMyAdmin SQL Dump
+-- version 4.7.4
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: May 31, 2019 at 04:11 AM
+-- Server version: 10.1.28-MariaDB
+-- PHP Version: 5.6.32
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `v_productivity`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `p_contracts`
+--
+
+CREATE TABLE `p_contracts` (
+  `id` int(11) NOT NULL,
+  `projectId` int(11) NOT NULL,
+  `description` varchar(100) NOT NULL,
+  `clientId` int(11) NOT NULL,
+  `item` varchar(100) NOT NULL,
+  `location` varchar(100) NOT NULL,
+  `length` int(11) NOT NULL,
+  `height` int(11) NOT NULL,
+  `width` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `p_contracts`
+--
+
+INSERT INTO `p_contracts` (`id`, `projectId`, `description`, `clientId`, `item`, `location`, `length`, `height`, `width`) VALUES
+(1, 3, 'Perimeter scaffold with every level plateform		', 1, '1a', 'level-3 to top', 231, 123, 2),
+(2, 3, 'cantilever scaffold ', 1, '2b', 'top level', 112, 32, 8);
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `p_contracts`
+--
+ALTER TABLE `p_contracts`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `p_contracts`
+--
+ALTER TABLE `p_contracts`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+
+-- phpMyAdmin SQL Dump
+-- version 4.7.4
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: May 31, 2019 at 04:12 AM
+-- Server version: 10.1.28-MariaDB
+-- PHP Version: 5.6.32
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `v_productivity`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `p_clients`
+--
+
+CREATE TABLE `p_clients` (
+  `clientId` int(11) NOT NULL,
+  `clientName` varchar(100) NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `p_clients`
+--
+
+INSERT INTO `p_clients` (`clientId`, `clientName`, `status`) VALUES
+(1, 'client1', 1),
+(2, 'client2', 1),
+(3, 'client3', 1);
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `p_clients`
+--
+ALTER TABLE `p_clients`
+  ADD PRIMARY KEY (`clientId`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `p_clients`
+--
+ALTER TABLE `p_clients`
+  MODIFY `clientId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+
+
