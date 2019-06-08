@@ -32,9 +32,10 @@ $clientlist = $contracts->getClientList();
 	<style>
 	.multiple_chk {height: 140px; width:  250px; padding: 5px; overflow: auto; font-size:12px; border: 1px solid #ccc;}
 	</style>
-	<script language="text/javascript" src="js/validate.js"></script>
+	
 </head>
 <body>
+    <script language="text/javascript" src="js/validate.js"></script>
 <center>
 	<div><strong class="bigtxt">Edit Contract</strong></div>
 	<div align="center">
@@ -62,13 +63,7 @@ $clientlist = $contracts->getClientList();
                             	</select>
                             </td>
                     </tr>
-		   
-					<tr>
-                          <td align="right">Description<strong style="color:#FE1100;padding-left:5px;">*</strong></td>
-                            <td>:</td>
-                            <td><input type="text" name="txtName" id="txtName" value="<?php echo $contractDetail['description']?>" style="width:250px;" maxlength="100"></td>
-                    </tr>
-					
+		   					
 	                <tr>
                             <td align="right">Client<strong style="color:#FE1100;padding-left:5px;">*</strong></td>
                             <td>:</td>
@@ -94,21 +89,27 @@ $clientlist = $contracts->getClientList();
                             <td><input type="text" name="txtLocation" id="txtLocation" value="<?php echo $contractDetail['location']?>" style="width:250px;" maxlength="60"></td>
                     </tr>
                     <tr>
-                            <td align="right">Length<strong style="color:#FE1100;padding-left:5px;">*</strong></td>
+                          <td align="right">Description<strong style="color:#FE1100;padding-left:5px;">*</strong></td>
+                            <td>:</td>
+                            <td><input type="text" name="txtDescription" id="txtDescription" value="<?php echo $contractDetail['description']?>" style="width:250px;" maxlength="100"></td>
+                    </tr>
+                    <tr>
+                            <td align="right">Length in meter(m)<strong style="color:#FE1100;padding-left:5px;">*</strong></td>
                             <td>:</td>
                             <td>
                             	<input type="text" name="txtLength" id="txtLength" maxlength="10" value="<?php echo $contractDetail['length']?>" onkeypress="return allowNumeric(event);"></td>
                     </tr>
+                    
                     <tr>
-                            <td align="right">Height<strong style="color:#FE1100;padding-left:5px;">*</strong></td>
-                            <td>:</td>
-                            <td><input type="text" name="txtHeight" id="txtHeight" value="<?php echo $contractDetail['height']?>" style="width:250px;" maxlength="60" onkeypress="return allowNumeric(event);"></td>
-                    </tr>
-                    <tr>
-                            <td align="right">Width<strong style="color:#FE1100;padding-left:5px;">*</strong></td>
+                            <td align="right">Width in meter(m)<strong style="color:#FE1100;padding-left:5px;">*</strong></td>
                             <td>:</td>
                             <td><input type="text" name="txtWidth" id="txtWidth" value="<?php echo $contractDetail['width']?>" style="width:250px;" maxlength="60" onkeypress="return allowNumeric(event);"></td>
-                    </tr>   
+                    </tr>  
+                    <tr>
+                            <td align="right">Height in meter(m)<strong style="color:#FE1100;padding-left:5px;">*</strong></td>
+                            <td>:</td>
+                            <td><input type="text" name="txtHeight" id="txtHeight" value="<?php echo $contractDetail['height']?>" style="width:250px;" maxlength="60" onkeypress="return allowNumeric(event);"></td>
+                    </tr> 
 		    
                     <tr>
 			    <td colspan="2"></td>
@@ -125,10 +126,10 @@ $clientlist = $contracts->getClientList();
 
 	<script language="javascript">	
 		var toValidateElem = {
-			'txtName' : new Array('empty',true),
 			'projectId' : new Array('empty',true),
 			'clientId' : new Array('empty',true),
 			'txtItem' : new Array('empty',true),
+            'txtDescription' : new Array('empty',true),
 			'txtLocation' : new Array('empty',true),	
 			'txtLength' : new Array('empty,is_number',true),
 			'txtWidth' : new Array('empty,is_number',true),

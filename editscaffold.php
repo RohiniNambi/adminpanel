@@ -63,6 +63,17 @@ elseif($_GET['i'] == "2")
                             <td><input type="text" name="txtName" id="txtName" value="<?php echo $scaffoldDetails['scaffoldName'];?>" style="width:250px;"></td>
                     </tr>
 
+                    <tr>
+                            <td align="right">Status<strong style="color:#FE1100;padding-left:5px;">*</strong></td>
+                            <td>:</td>
+                            <td><select name="status" id="status" onchange="return chkUserType(this.value);">
+                                    <option value="">-Select-</option>
+					   				<option value="1" <?php if($scaffoldDetails['status'] == 1) echo "selected";?>>Active</option>
+					   				<option value="2" <?php if($scaffoldDetails['status'] == 2) echo "selected";?>>Closed</option>
+						</select></td>
+                    </tr>
+
+
 		    
                     <tr>
 			    <td colspan="2"></td>

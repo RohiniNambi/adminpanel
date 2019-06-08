@@ -35,7 +35,7 @@
 	<li><a href="createusers.php">Create User</a></li>		
 </ul>
 <ul id="ddsubmenu2" class="ddsubmenustyle">
-	<li id="firstChild"><a href="workers.php">View workers</a></li>
+	<li id="firstChild"><a href="workers.php">View Workers</a></li>
 	<li><a href="createworkers.php">Create Worker</a></li>
 	<li id="firstChild"><a href="workersteam.php">View Workers Team</a></li>		
 	<li><a href="createworkersteam.php">Create Workers team</a></li>		

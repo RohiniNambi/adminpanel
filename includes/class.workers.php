@@ -39,7 +39,7 @@ class WORKERS
 		
 		$selectFileds=array("teamid","teamName","status","createdOn");
 		$whereClause = "teamid != 0";
-		$res=$db->select($dbCon, $DBNAME["LMS"],$TABLEINFO["WORKERTEAM"],$selectFileds,$whereClause);
+		$res=$db->select($dbCon, $DBNAME["LMS"],$TABLEINFO["TEAM"],$selectFileds,$whereClause);
 		
 		if($res[1] > 0){
 			$campaignInfo = $db->fetchArray($res[0],1);
@@ -62,7 +62,7 @@ class WORKERS
 		
 		$selectFileds=array("teamid","teamName","createdOn","status");
 		$whereClause = "teamid = $tid";
-		$res=$db->select($dbCon,$DBNAME["LMS"],$TABLEINFO["WORKERTEAM"],$selectFileds,$whereClause);
+		$res=$db->select($dbCon,$DBNAME["LMS"],$TABLEINFO["TEAM"],$selectFileds,$whereClause);
 		
 		if($res[1] > 0){
 			$userInfo = $db->fetchArray($res[0]);
@@ -135,7 +135,7 @@ class WORKERS
 		
 		$selectFileds=array("teamid");
 		$whereClause = "teamName = '".trim($postArr["txtName"]);
-		$res=$db->select($dbcon,$DBNAME["LMS"],$TABLEINFO["WORKERTEAM"],$selectFileds,$whereClause);
+		$res=$db->select($dbcon,$DBNAME["LMS"],$TABLEINFO["TEAM"],$selectFileds,$whereClause);
 		
 		if($res[1] > 0){
 			$returnval = 0;
@@ -144,7 +144,7 @@ class WORKERS
 			$insertArr["createdOn"]=date("Y-m-d H:i:s");
 			$dbm = new DB;
 			$dbcon2 = $dbm->connect('M',$DBNAME["LMS"],$DBINFO["USERNAME"],$DBINFO["PASSWORD"]);
-			$insid = $dbm->insert($dbcon2,$DBNAME["LMS"],$TABLEINFO["WORKERTEAM"],$insertArr,1,2);
+			$insid = $dbm->insert($dbcon2,$DBNAME["LMS"],$TABLEINFO["TEAM"],$insertArr,1,2);
 			
 			$dbm->dbClose();
 			if($insid == 0 || $insid == ''){ $returnval = 2; }else { $returnval = 1; }
@@ -162,7 +162,7 @@ class WORKERS
 
 		$dbm = new DB;
 		$dbcon = $dbm->connect('M',$DBNAME["LMS"],$DBINFO["USERNAME"],$DBINFO["PASSWORD"]);
-		$insid = $dbm->update($dbcon,$DBNAME["LMS"],$TABLEINFO["WORKERTEAM"],$insertArr,$whereClasue);
+		$insid = $dbm->update($dbcon,$DBNAME["LMS"],$TABLEINFO["TEAM"],$insertArr,$whereClasue);
 		$dbm->dbClose();
 		if($insid == 0 || $insid == ''){ $returnval = 2; }else { $returnval = 1; }
 		
@@ -205,7 +205,7 @@ class WORKERS
 		
 		$dbm = new DB;
 		$dbcon = $dbm->connect('M',$DBNAME["LMS"],$DBINFO["USERNAME"],$DBINFO["PASSWORD"]);
-		$insid = $dbm->delete($dbcon,$DBNAME["LMS"],$TABLEINFO["WORKERTEAM"],$whereClasue);
+		$insid = $dbm->delete($dbcon,$DBNAME["LMS"],$TABLEINFO["TEAM"],$whereClasue);
 		$dbm->dbClose();
 		if($insid == 0 || $insid == ''){ $returnval = 2; }else { $returnval = 1; }
 		

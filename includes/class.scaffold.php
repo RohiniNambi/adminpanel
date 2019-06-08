@@ -69,11 +69,11 @@ class SCAFFOLD
 			$returnval = 0;
 		}else{
 			$insertArr["scaffoldName"]=trim($postArr["txtName"]);
+			$insertArr["status"]=trim($postArr["status"]);
 
 			$dbm = new DB;
 			$dbCon2 = $dbm->connect('M',$DBNAME["LMS"],$DBINFO["USERNAME"],$DBINFO["PASSWORD"]);
 			$insid = $dbm->insert($dbCon2, $DBNAME["LMS"],$TABLEINFO["SCAFFOLDTYPE"],$insertArr,1,2);
-			//pr($dbm);exit;
 			$dbm->dbClose();
 			if($insid == 0 || $insid == ''){ $returnval = 2; }else { $returnval = 1; }
 			
@@ -88,6 +88,7 @@ class SCAFFOLD
 		
 		$whereClasue = "id = ".$this->common->Decrypt($postArr['sid']);
 		$insertArr["scaffoldName"]=trim($postArr["txtName"]);
+		$insertArr["status"]=trim($postArr["status"]);
 		
 		$dbm = new DB;
 		$dbCon = $dbm->connect('M',$DBNAME["LMS"],$DBINFO["USERNAME"],$DBINFO["PASSWORD"]);

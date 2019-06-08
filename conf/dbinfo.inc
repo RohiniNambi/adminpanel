@@ -11,7 +11,7 @@ $DBNAME["LMS"] = "v_productivity";
 $TABLEINFO["USERS"] = "p_users";
 
 $TABLEINFO["WORKERS"] = "p_workers";
-$TABLEINFO["WORKERTEAM"] = "p_workerteam";
+$TABLEINFO["TEAM"] = "p_workerteam";
 
 $TABLEINFO["SCAFFOLDTYPE"] = "p_scaffoldtype";
 

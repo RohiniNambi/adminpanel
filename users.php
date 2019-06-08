@@ -18,7 +18,6 @@ $newProList = array();
 foreach($projectList as $det){
 	$newProList[$det["projectId"]] = $det["projectName"];
 }
-
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
@@ -66,7 +65,7 @@ foreach($projectList as $det){
 				$i=0;
 			foreach($userslist as $userval){
 				$i++;
-				$pros = explode(",", $userval["projects"]);
+				$pros = explode(",", $userval["project"]);
 			?>
 			<tr id="row_<?php echo $i?>" bgcolor="#FFFFFF">
 				<td><?php echo $i?></td>				

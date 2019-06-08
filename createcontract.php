@@ -42,7 +42,6 @@ foreach($clientlist as $value){
 	.multiple_chk {height: 140px; width:  250px; padding: 5px; overflow: auto; font-size:12px; border: 1px solid #ccc;}
 	</style>
 <script type="text/javascript" src="js/common.js"></script>
-<script language="javascript" src="js/validate.js"></script>
 </head>
 <body>
 <center>
@@ -78,11 +77,6 @@ foreach($clientlist as $value){
                         	</td>
                     </tr>
                     <tr>
-                            <td align="right">Description<strong style="color:#FE1100;padding-left:5px;">*</strong></td>
-                            <td>:</td>
-                            <td><input type="text" name="txtName" id="txtName" value="" style="width:250px;" maxlength="100"></td>
-                    </tr>
-                    <tr>
                             <td align="right">Client<strong style="color:#FE1100;padding-left:5px;">*</strong></td>
                             <td>:</td>
                             <td><select name="clientId" id="clientId" style="width:250px;">
@@ -107,21 +101,27 @@ foreach($clientlist as $value){
                             <td><input type="text" name="txtLocation" id="txtLocation" value="" style="width:250px;" maxlength="60"></td>
                     </tr>
                     <tr>
-                            <td align="right">Length<strong style="color:#FE1100;padding-left:5px;">*</strong></td>
+                            <td align="right">Description<strong style="color:#FE1100;padding-left:5px;">*</strong></td>
+                            <td>:</td>
+                            <td><input type="text" name="txtName" id="txtName" value="" style="width:250px;" maxlength="100"></td>
+                    </tr>
+                    <tr>
+                            <td align="right">Length in meter(m)<strong style="color:#FE1100;padding-left:5px;">*</strong></td>
                             <td>:</td>
                             <td>
                             	<input type="text" name="txtLength" id="txtLength" maxlength="10" value="" onkeypress="return allowNumeric(event);"></td>
                     </tr>
                     <tr>
-                            <td align="right">Height<strong style="color:#FE1100;padding-left:5px;">*</strong></td>
+                            <td align="right">Width in meter(m)<strong style="color:#FE1100;padding-left:5px;">*</strong></td>
+                            <td>:</td>
+                            <td><input type="text" name="txtWidth" id="txtWidth" value="" style="width:250px;" maxlength="60" onkeypress="return allowNumeric(event);"></td>
+                    </tr>   
+                    <tr>
+                            <td align="right">Height in meter(m)<strong style="color:#FE1100;padding-left:5px;">*</strong></td>
                             <td>:</td>
                             <td><input type="text" name="txtHeight" id="txtHeight" value="" style="width:250px;" maxlength="60" onkeypress="return allowNumeric(event);"></td>
                     </tr>
-                    <tr>
-                            <td align="right">Width<strong style="color:#FE1100;padding-left:5px;">*</strong></td>
-                            <td>:</td>
-                            <td><input type="text" name="txtWidth" id="txtWidth" value="" style="width:250px;" maxlength="60" onkeypress="return allowNumeric(event);"></td>
-                    </tr>		    
+                    	    
 			    <td colspan="2"></td>
                             <td><input type="submit" name="sbnAddUser" id="sbnAddUser" value="Submit" class="button"></td>				
                     </tr>
@@ -140,14 +140,14 @@ foreach($clientlist as $value){
 	
 	
 
-
+<script language="javascript" src="js/validate.js"></script>
 	<script language="javascript">	
 		var toValidateElem = {
-			'txtName' : new Array('empty',true),
 			'projectId' : new Array('empty',true),
 			'clientId' : new Array('empty',true),
 			'txtItem' : new Array('empty',true),
 			'txtLocation' : new Array('empty',true),	
+            'txtName' : new Array('empty',true),
 			'txtLength' : new Array('empty,is_number',true),
 			'txtWidth' : new Array('empty,is_number',true),
 			'txtHeight' : new Array('empty,is_number',true)

@@ -64,12 +64,12 @@ elseif($_GET['i'] == "0")
 		     <tr>
                             <td align="right">User Name<strong style="color:#FE1100;padding-left:5px;">*</strong></td>
                             <td>:</td>
-                            <td><input type="text" name="txtUsername" id="txtUsername" value="" style="width:250px;"></td>
+                            <td><input type="text" name="txtUsername" id="txtUsername" value="" style="width:250px;" autocomplete="off"></td>
                     </tr>
 		      <tr>
                             <td align="right">Password<strong style="color:#FE1100;padding-left:5px;">*</strong></td>
                             <td>:</td>
-                            <td><input type="password" name="txtPassword" id="txtPassword" value="" style="width:250px;"></td>
+                            <td><input type="password" name="txtPassword" id="txtPassword" value="" style="width:250px;" autocomplete="off"></td>
                     </tr>
                                 
                     <tr>

@@ -41,7 +41,7 @@ $scaffoldlist = $scaffold->getScaffoldList();
 		
 		<input type="hidden" name="hdnAction" id="hdnAction">
 			<br>
-		<a href="createscaffold.php"><input type="button" name="createuser" value="Create a scaffold" class="button"></a>
+		<a href="createscaffold.php"><input type="button" name="createuser" value="Create a Scaffold" class="button"></a>
 		<br><br>
 		<table cellpadding="1" cellspacing="1" border="0" bgcolor="#EEEEEE" width="100%" class="mediumtxt">
 			<tr bgcolor="#EEEEEE">
@@ -62,9 +62,9 @@ $scaffoldlist = $scaffold->getScaffoldList();
 			<tr id="row_<?php echo $i?>" bgcolor="#FFFFFF">
 				<td><?php echo $i?></td>				
 				<td><?php echo $scaffoldval["scaffoldName"];?></td>
-				<td><?php echo $scaffoldval["status"];?></td>				
+				<td><?php if($scaffoldval["status"] == 1) { echo "Active";} else{ echo "Closed";}?></td>				
                              
-				<td><a href="#" onclick='_getBox("editscaffold.php?page=Edit&ac=<?php echo $commonObj->Encrypt($scaffoldval["id"]);?>","50%","95%")'><img src="images/edit.gif" border="0" alt="edit" title="Edit"></a> &nbsp;<!-- <a onclick='_getBox("viewuser.php?i={$userslist[$key].uid|base64_encode}","35%","75%")' href="javascript:void(0)"><img src="images/view.gif" border="0" alt="view" title="View"></a>&nbsp;-->&nbsp;<a href="javascript:void(0)" onclick="confimuser('<?php echo $commonObj->Encrypt($scaffoldval["id"]);?>','<?php echo $i?>');"><img src="images/close.gif" border="0" alt="Delete" title="Delete"></td>
+				<td><a href="#" onclick='_getBox("editscaffold.php?page=Edit&ac=<?php echo $commonObj->Encrypt($scaffoldval["id"]);?>","50%","50%")'><img src="images/edit.gif" border="0" alt="edit" title="Edit"></a> &nbsp;<!-- <a onclick='_getBox("viewuser.php?i={$userslist[$key].uid|base64_encode}","35%","75%")' href="javascript:void(0)"><img src="images/view.gif" border="0" alt="view" title="View"></a>&nbsp;-->&nbsp;<a href="javascript:void(0)" onclick="confimuser('<?php echo $commonObj->Encrypt($scaffoldval["id"]);?>','<?php echo $i?>');"><img src="images/close.gif" border="0" alt="Delete" title="Delete"></td>
 				
 			</tr>
 			<?php
