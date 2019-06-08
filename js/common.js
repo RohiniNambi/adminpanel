@@ -101,6 +101,22 @@ function allowNumeric(e)
 	 }
 }
 
+function allowNumericNotdecimal(e)
+{
+	if (!e) var e = window.event;
+	if(!e.which) key = e.keyCode;
+	else key = e.which;	
+	if((key>31)&&(key<48 || key>57))
+	{
+		
+		return false;
+	} else
+	 {
+	 	key=key;
+	  return true;
+	 }
+}
+
 function email_validation(value)
 {
     var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;

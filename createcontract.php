@@ -1,11 +1,23 @@
 <?php
-
 include_once "./includes/class.projects.php";
 
 if(trim($session_id) == ""){
 	$commonObj->RedirectTo('logout.php');
 }
 
+
+$contracts = new PROJECTS;
+$projectlist = $contracts->getProjectList();
+$projectName = array();
+foreach($projectlist as $value){
+    $projectName[$value["projectId"]]=$value["projectName"];
+}
+
+$clientlist = $contracts->getClientList();
+$clientName = array();
+foreach($clientlist as $value){
+    $clientName[$value["clientId"]]=$value["clientName"];
+}
 
 if($_GET['i'] == "1")
 	$success = "Contract Created Successfully";
@@ -14,18 +26,6 @@ elseif($_GET['i'] == "2")
 elseif($_GET['i'] == "0")
 	$error = "Contract already exists.";	
 
-$contracts = new PROJECTS;
-$projectlist = $contracts->getProjectList();
-$projectName = array();
-foreach($projectlist as $value){
-	$projectName[$value["projectId"]]=$value["projectName"];
-}
-
-$clientlist = $contracts->getClientList();
-$clientName = array();
-foreach($clientlist as $value){
-	$clientName[$value["clientId"]]=$value["clientName"];
-}
 
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -104,6 +104,7 @@ foreach($clientlist as $value){
                             <td align="right">Description<strong style="color:#FE1100;padding-left:5px;">*</strong></td>
                             <td>:</td>
                             <td><input type="text" name="txtName" id="txtName" value="" style="width:250px;" maxlength="100"></td>
+
                     </tr>
                     <tr>
                             <td align="right">Length in meter(m)<strong style="color:#FE1100;padding-left:5px;">*</strong></td>
@@ -121,7 +122,12 @@ foreach($clientlist as $value){
                             <td>:</td>
                             <td><input type="text" name="txtHeight" id="txtHeight" value="" style="width:250px;" maxlength="60" onkeypress="return allowNumeric(event);"></td>
                     </tr>
-                    	    
+                    <tr>
+                            <td align="right">Sets<strong style="color:#FE1100;padding-left:5px;">*</strong></td>
+                            <td>:</td>
+                            <td>
+                                <input type="text" name="txtSets" id="txtSets" maxlength="10" value="<?php echo $contractDetail['sets']?>" onkeypress="return allowNumericNotdecimal(event);"></td>
+                    </tr>	    
 			    <td colspan="2"></td>
                             <td><input type="submit" name="sbnAddUser" id="sbnAddUser" value="Submit" class="button"></td>				
                     </tr>
@@ -143,14 +149,15 @@ foreach($clientlist as $value){
 <script language="javascript" src="js/validate.js"></script>
 	<script language="javascript">	
 		var toValidateElem = {
-			'projectId' : new Array('empty',true),
+            'txtName' : new Array('empty',true),
+			'txtLocation' : new Array('empty',true),
+            'projectId' : new Array('empty',true),
 			'clientId' : new Array('empty',true),
 			'txtItem' : new Array('empty',true),
-			'txtLocation' : new Array('empty',true),	
-            'txtName' : new Array('empty',true),
-			'txtLength' : new Array('empty,is_number',true),
-			'txtWidth' : new Array('empty,is_number',true),
-			'txtHeight' : new Array('empty,is_number',true)
+			'txtLength' : new Array('empty','is_number',true),
+			'txtWidth' : new Array('empty','is_number',true),
+			'txtHeight' : new Array('empty','is_number',true),
+            'txtSets' : new Array('empty','is_number',true)
 		}
 		var toDisplayError = {
 			'empty' : 'Must not be empty'

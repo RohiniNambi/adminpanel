@@ -8,6 +8,7 @@ if(trim($session_id) == ""){
 $contracts = new PROJECTS;
 $cid = $commonObj->Decrypt($_GET['ac']);
 $contractDetail = $contracts->getContractDetails($cid);
+pr($contractDetail);
 if($_GET['i'] == "1")
 	$success = "Contract edited successfully";
 elseif($_GET['i'] == "2")
@@ -91,7 +92,7 @@ $clientlist = $contracts->getClientList();
                     <tr>
                           <td align="right">Description<strong style="color:#FE1100;padding-left:5px;">*</strong></td>
                             <td>:</td>
-                            <td><input type="text" name="txtDescription" id="txtDescription" value="<?php echo $contractDetail['description']?>" style="width:250px;" maxlength="100"></td>
+                            <td><input type="text" name="txtName" id="txtName" value="<?php echo $contractDetail['description']?>" style="width:250px;" maxlength="100"></td>
                     </tr>
                     <tr>
                             <td align="right">Length in meter(m)<strong style="color:#FE1100;padding-left:5px;">*</strong></td>
@@ -110,6 +111,12 @@ $clientlist = $contracts->getClientList();
                             <td>:</td>
                             <td><input type="text" name="txtHeight" id="txtHeight" value="<?php echo $contractDetail['height']?>" style="width:250px;" maxlength="60" onkeypress="return allowNumeric(event);"></td>
                     </tr> 
+                    <tr>
+                            <td align="right">Sets<strong style="color:#FE1100;padding-left:5px;">*</strong></td>
+                            <td>:</td>
+                            <td>
+                                <input type="text" name="txtSets" id="txtSets" maxlength="10" value="<?php echo $contractDetail['sets']?>" onkeypress="return allowNumericNotdecimal(event);"></td>
+                    </tr>
 		    
                     <tr>
 			    <td colspan="2"></td>
@@ -129,11 +136,12 @@ $clientlist = $contracts->getClientList();
 			'projectId' : new Array('empty',true),
 			'clientId' : new Array('empty',true),
 			'txtItem' : new Array('empty',true),
-            'txtDescription' : new Array('empty',true),
+            'txtName' : new Array('empty',true),
 			'txtLocation' : new Array('empty',true),	
-			'txtLength' : new Array('empty,is_number',true),
-			'txtWidth' : new Array('empty,is_number',true),
-			'txtHeight' : new Array('empty,is_number',true)		
+			'txtLength' : new Array('empty','is_number',true),
+			'txtWidth' : new Array('empty','is_number',true),
+			'txtHeight' : new Array('empty','is_number',true),
+            'txtSets' : new Array('empty','is_number',true)
 		}
 		var toDisplayError = {
 			'empty' : 'Must not be empty'

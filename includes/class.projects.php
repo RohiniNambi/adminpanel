@@ -276,6 +276,7 @@ class PROJECTS
 			$insertArr["length"]=trim($postArr["txtLength"]);
 			$insertArr["height"]=trim($postArr["txtHeight"]);
 			$insertArr["width"]=trim($postArr["txtWidth"]);			
+			$insertArr["sets"]=trim($postArr["txtSets"]);			
 			$dbm = new DB;
 			$dbcon2 = $dbm->connect('M',$DBNAME["LMS"],$DBINFO["USERNAME"],$DBINFO["PASSWORD"]);
 			$insid = $dbm->insert($dbcon2,$DBNAME["LMS"],$TABLEINFO["CONTRACTS"],$insertArr,1,2);
@@ -298,6 +299,7 @@ class PROJECTS
 		$insertArr["height"]=trim($postArr["txtHeight"]);
 		$insertArr["width"]=trim($postArr["txtWidth"]);
 		$insertArr["description"]=trim($postArr["txtName"]);
+		$insertArr["sets"]=trim($postArr["txtSets"]);
 		
 		$dbm = new DB;
 		$dbcon = $dbm->connect('M',$DBNAME["LMS"],$DBINFO["USERNAME"],$DBINFO["PASSWORD"]);
@@ -313,7 +315,7 @@ class PROJECTS
 		$db = new DB;
 		$dbCon = $db->connect('S',$DBNAME["LMS"],$DBINFO["USERNAME"],$DBINFO["PASSWORD"]);
 		
-		$selectFileds=array("id, projectId","description","clientId","item","location","length","height","width");
+		$selectFileds=array("id, projectId","description","clientId","item","location","length","height","width","sets");
 		$whereClause = "id = $cid";
 		$res=$db->select($dbCon,$DBNAME["LMS"],$TABLEINFO["CONTRACTS"],$selectFileds,$whereClause);
 		

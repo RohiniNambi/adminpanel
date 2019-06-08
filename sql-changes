@@ -1,0 +1,8 @@
+
+ALTER TABLE `p_contracts` ADD `sets` INT(11) NOT NULL DEFAULT '0' AFTER `width`;
+
+ALTER TABLE `p_contracts` CHANGE `length` `length` FLOAT(11) NOT NULL;
+
+ALTER TABLE `p_contracts` CHANGE `height` `height` FLOAT(11) NOT NULL;
+
+ALTER TABLE `p_contracts` CHANGE `width` `width` FLOAT(11) NOT NULL;
