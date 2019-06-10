@@ -37,8 +37,8 @@
 <ul id="ddsubmenu2" class="ddsubmenustyle">
 	<li id="firstChild"><a href="workers.php">View Workers</a></li>
 	<li><a href="createworkers.php">Create Worker</a></li>
-	<li id="firstChild"><a href="workersteam.php">View Workers Team</a></li>		
-	<li><a href="createworkersteam.php">Create Workers team</a></li>		
+	<li><a href="workersteam.php">View Workers Team</a></li>		
+	<li><a href="createworkersteam.php">Create Workers Team</a></li>		
 </ul>
 <ul id="ddsubmenu3" class="ddsubmenustyle">
 	<li id="firstChild"><a href="projects.php">View Project</a></li>
@@ -55,4 +55,10 @@
 <ul id="ddsubmenu6" class="ddsubmenustyle">	
 	<li id="firstChild"><a href="scaffold.php">View Scaffold</a></li>		
 	<li><a href="createscaffold.php">Create Scaffold</a></li>		
+	<li><a href="scaffoldsubcategory.php">View Scaffold Sub Category</a></li>		
+	<li><a href="createscaffoldsubcategory.php">Create Scaffold Sub Category</a></li>
+	<li><a href="grade.php">View Grade</a></li>
+	<li><a href="creategrade.php">Create Grade</a></li>
+	<li><a href="productivityslab.php">View Productivity SLAB</a></li>
+	<li><a href="createproductivityslab.php">Create Productivity SLAB</a></li>		
 </ul>

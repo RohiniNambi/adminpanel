@@ -8,7 +8,6 @@ if(trim($session_id) == ""){
 $contracts = new PROJECTS;
 $cid = $commonObj->Decrypt($_GET['ac']);
 $contractDetail = $contracts->getContractDetails($cid);
-pr($contractDetail);
 if($_GET['i'] == "1")
 	$success = "Contract edited successfully";
 elseif($_GET['i'] == "2")
@@ -17,7 +16,10 @@ elseif($_GET['i'] == "0")
 	$error = "Contract already exists.";	
 
 $projectlist = $contracts->getProjectList();
-$clientlist = $contracts->getClientList();
+if($contractDetail["projectId"]!="")
+    $clientlist = $contracts->getClientListBasedonPjt($contractDetail["projectId"]);
+else
+    $clientlist = $contracts->getClientList();
 
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -33,7 +35,7 @@ $clientlist = $contracts->getClientList();
 	<style>
 	.multiple_chk {height: 140px; width:  250px; padding: 5px; overflow: auto; font-size:12px; border: 1px solid #ccc;}
 	</style>
-	
+<script type="text/javascript" src="js/common.js"></script>	
 </head>
 <body>
     <script language="text/javascript" src="js/validate.js"></script>
@@ -55,7 +57,7 @@ $clientlist = $contracts->getClientList();
                             <td align="right">Project<strong style="color:#FE1100;padding-left:5px;">*</strong></td>
                             <td>:</td>
                             <td>
-                            	<select name="projectId" id="projectId" style="width:250px;">
+                            	<select name="projectId" id="projectId" style="width:250px;" onchange="return loadClients(this.value);">
                                     <option value="">-Select-</option>
 								    <?php foreach($projectlist as $key=>$values){ ?>
 									   <option <?php if($contractDetail["projectId"] == $values["projectId"]) echo "selected";?> value="<?php echo $values["projectId"];?>"><?php echo $values["projectName"]?></option>
@@ -148,6 +150,21 @@ $clientlist = $contracts->getClientList();
 		}
 		var _formId = "frmuser";
 		var _submitId = "sbnAddUser";
+        function loadClients(pid){
+            $.ajax({
+                type: "POST", url: 'contractsaction.php', data: "id="+pid+"&hAct=4",dataType: "JSON",
+                success: function(data){
+                    optionHtml = '<option value="">-Select-</option>';
+                    if(data != 0){
+                        $.each(data, function(i, item){
+                            optionHtml = optionHtml+'<option value='+item.clientId+'>'+item.clientName+'</option>';
+                        });
+                    }
+                    $("#clientId").html(optionHtml);
+                }
+            });
+
+        }
 	</script>
 	
 </body>

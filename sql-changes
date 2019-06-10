@@ -6,3 +6,29 @@ ALTER TABLE `p_contracts` CHANGE `length` `length` FLOAT(11) NOT NULL;
 ALTER TABLE `p_contracts` CHANGE `height` `height` FLOAT(11) NOT NULL;
 
 ALTER TABLE `p_contracts` CHANGE `width` `width` FLOAT(11) NOT NULL;
+
+ALTER TABLE `p_clients` ADD `projects` VARCHAR(100) NOT NULL DEFAULT '0' AFTER `clientName`;
+
+ALTER TABLE `p_clients` ADD `createdOn` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP AFTER `status`;
+
+ALTER TABLE `p_clients` ADD `createdBy` INT NOT NULL DEFAULT '0' AFTER `createdOn`;
+
+ALTER TABLE `p_clients`  ADD `modifiedOn` DATETIME on update CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP  AFTER `createdBy`;
+
+ALTER TABLE `p_clients`  ADD `modifiedBy` INT(11) NOT NULL DEFAULT '0'  AFTER `modifiedOn`;
+
+ALTER TABLE `p_users` CHANGE `project` `project` VARCHAR(11) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL DEFAULT '0';
+
+ALTER TABLE `p_scaffoldsubcatergory` CHANGE `createdOn` `createdOn` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP;
+
+ALTER TABLE `p_scaffoldsubcatergory` CHANGE `modifiedOn` `modifiedOn` DATETIME on update CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP;
+
+ALTER TABLE `p_grade` CHANGE `modifiedOn` `modifiedOn` DATETIME on update CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP;
+
+ALTER TABLE `p_grade` CHANGE `createdOn` `createdOn` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP;
+
+ALTER TABLE `p_grade` CHANGE `range` `gradeRange` INT(11) NOT NULL;
+
+ALTER TABLE `p_productivityslab` CHANGE `createdOn` `createdOn` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP;
+
+ALTER TABLE `p_productivityslab` CHANGE `modifiedOn` `modifiedOn` DATETIME on update CURRENT_TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP;

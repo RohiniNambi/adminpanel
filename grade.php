@@ -1,7 +1,8 @@
 <?php
 include_once "./includes/class.scaffold.php";
+
 if(trim($session_id) == ""){
-	 $commonObj->RedirectTo('logout.php');
+	// $commonObj->RedirectTo('logout.php');
 }
 
 if(trim($session_type) != 1){
@@ -9,15 +10,14 @@ if(trim($session_type) != 1){
 	exit;
 }
 
-$scaffold = new SCAFFOLD;
-$scaffoldlist = $scaffold->getScaffoldList();
-
+$grades = new SCAFFOLD;
+$gradeslist = $grades->getGradesList();
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-	<title>:: Scaffold Type ::</title>
+	<title>:: Grade ::</title>
 	<style>
 		@import "css/style.css";		
 		@import "css/tab.css";	
@@ -40,30 +40,34 @@ $scaffoldlist = $scaffold->getScaffoldList();
 		
 		<input type="hidden" name="hdnAction" id="hdnAction">
 			<br>
-		<a href="createscaffold.php"><input type="button" name="createuser" value="Create a Scaffold" class="button"></a>
+		<a href="creategrade.php"><input type="button" name="createuser" value="Create a Grade" class="button"></a>
 		<br><br>
 		<table cellpadding="1" cellspacing="1" border="0" bgcolor="#EEEEEE" width="100%" class="mediumtxt">
 			<tr bgcolor="#EEEEEE">
 				<th>&nbsp;</th>				
-				<th>Scaffold Name</th>
-				<th>Status</th>
+				<th>Range</th>
+				<th>Percentage</th>
+				<th>Grade</th>
 				<th>Action</th>
 				
 			</tr>
 			<?php
 
 	
-			if(count($scaffoldlist) > 0){
+			if(count($gradeslist) > 0){
 				$i=0;
-			foreach($scaffoldlist as $scaffoldval){
-				$i++;				
+			foreach($gradeslist as $gradeval){
+				$i++;
 			?>
 			<tr id="row_<?php echo $i?>" bgcolor="#FFFFFF">
 				<td><?php echo $i?></td>				
-				<td><?php echo $scaffoldval["scaffoldName"];?></td>
-				<td><?php if($scaffoldval["status"] == 1) { echo "Active";} else{ echo "Closed";}?></td>				
+				<td><?php echo $gradeval["gradeRange"];?></td>
+				<td><?php echo $gradeval["Percentage"];?></td>
+		
+				<td><?php echo $gradeval["grade"]?></td>
+				
                              
-				<td><a href="#" onclick='_getBox("editscaffold.php?page=Edit&ac=<?php echo $commonObj->Encrypt($scaffoldval["id"]);?>","50%","50%")'><img src="images/edit.gif" border="0" alt="edit" title="Edit"></a> &nbsp;<!-- <a onclick='_getBox("viewuser.php?i={$userslist[$key].uid|base64_encode}","35%","75%")' href="javascript:void(0)"><img src="images/view.gif" border="0" alt="view" title="View"></a>&nbsp;-->&nbsp;<a href="javascript:void(0)" onclick="confimuser('<?php echo $commonObj->Encrypt($scaffoldval["id"]);?>','<?php echo $i?>');"><img src="images/close.gif" border="0" alt="Delete" title="Delete"></td>
+				<td><a href="#" onclick='_getBox("editgrade.php?page=Edit&ac=<?php echo $commonObj->Encrypt($gradeval["id"]);?>","50%","60%")'><img src="images/edit.gif" border="0" alt="edit" title="Edit"></a> &nbsp; &nbsp;<a href="javascript:void(0)" onclick="confimuser('<?php echo $commonObj->Encrypt($gradeval["id"]);?>','<?php echo $i?>');"><img src="images/close.gif" border="0" alt="Delete" title="Delete"></td>
 				
 			</tr>
 			<?php
@@ -103,13 +107,45 @@ $scaffoldlist = $scaffold->getScaffoldList();
 		function DeleteUser(id){						
 			str = id.split('~~~~~');
 			$.ajax({
-				type: "POST", url: 'scaffoldaction.php', data: "id="+str[0]+"&hAct=3",
+				type: "POST", url: 'gradeaction.php', data: "id="+str[0]+"&hAct=3",
 				complete: function(data){
 					$('#row_'+str[1]).hide('slow');
 				}
 			});
 		}
+		
+		function ifCheckedit()
+		{
+		ptr=document.frmUser;
+		len=ptr.elements.length;
+		var i=0,j=0;
+		for(i=0; i<len; i++) {
+		
+			if (ptr.elements[i].name=='Del_Id[]')
+			{	
+				if(ptr.elements[i].checked==true)	   
+				{
+					 j=j+1;	
+					 val=ptr.elements[i].value; 
+		
+				}
+			}
+		}
+			if(j==0)
+			{
+				alert("Check the checkbox");	
+				return false;
 				
+			}
+			if(j>1)	
+			{	
+			alert("You can edit only one user at a time");	
+			return false;
+			}
+			_getBox("createusers.php?page=Edit&i="+val);
+						
+                }
+		
 		
 		function ifCheck(val)
 		{

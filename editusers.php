@@ -13,7 +13,7 @@ if(trim($session_type) != 1){
 $uid = $commonObj->Decrypt($_GET['ac']);
 $users = new USERS;
 $usersDetails = $users->getUserDetails($uid);
-$selProjects = explode(",", $usersDetails["projects"]);
+$selProjects = explode(",", $usersDetails["project"]);
 $projectList = $users->getActiveProjectList();
 // pr($usersDetails);
 if($_GET['i'] == "1")
@@ -28,7 +28,7 @@ elseif($_GET['i'] == "2")
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-	<title>:: Create User ::</title>
+	<title>:: Edit User ::</title>
 	<style>
 		@import "css/style.css";
 		@import "css/validate.css";		
@@ -96,8 +96,8 @@ elseif($_GET['i'] == "2")
                             <td align="right">Projects<strong style="color:#FE1100;padding-left:5px;">*</strong></td>
                             <td>:</td>
                             <td>
-                                <select style="width:250px" name="projects[]" id="projects" multiple onchange="">
-                                    
+                                <select style="width:250px" name="projects[]" id="projects" multiple onchange="" <?php if($usersDetails['userType'] == 5){ echo "visible"; } else{ echo "hidden"; }?> <?php /*if($usersDetails['userType'] != 5){ echo "disabled"; } else echo "required";*/  ?>>
+                         <option value="">-Select-</option>           
 				    <?php
 				    foreach($projectList as $key=>$values){
 				    ?>
@@ -126,6 +126,7 @@ elseif($_GET['i'] == "2")
 
 	<script language="javascript">	
 		var toValidateElem = {
+			'projects' : new Array('empty',true),
 			'txtName' : new Array('empty',true),
 			'txtUsername' : new Array('empty',true),
 			'txtEmail' : new Array('email',false),
@@ -144,7 +145,6 @@ elseif($_GET['i'] == "2")
 			if(val == "5"){
 			
 				document.getElementById("projectdiv").style.visibility="visible";
-
 			}
 			else{
 				document.getElementById("projectdiv").style.visibility="hidden";

@@ -15,6 +15,8 @@ elseif($_POST['hAct'] == 2){
 }
 elseif($_POST['hAct'] == 3){
         echo $userresp = $contracts->deleteContract($_POST['id']);
+}elseif($_POST['hAct'] == 4){
+        echo $userresp = $contracts->loadClientBasedonPjts($_POST['id']);
 }
 
 

@@ -67,7 +67,7 @@ elseif($_GET['i'] == "0")
                             <td align="right">Project<strong style="color:#FE1100;padding-left:5px;">*</strong></td>
                             <td>:</td>
                             <td>
-                            	<select name="projectId" id="projectId" style="width:250px;">
+                            	<select name="projectId" id="projectId" style="width:250px;" onchange="return loadClients(this.value);">
                                     <option value="">-Select-</option>
 								    <?php foreach($projectlist as $key=>$values){ ?>
 									   <option value="<?php echo $values["projectId"];?>"><?php echo $values["projectName"]?></option>
@@ -79,7 +79,7 @@ elseif($_GET['i'] == "0")
                     <tr>
                             <td align="right">Client<strong style="color:#FE1100;padding-left:5px;">*</strong></td>
                             <td>:</td>
-                            <td><select name="clientId" id="clientId" style="width:250px;">
+                            <td><select name="clientId" id="clientId" style="width:250px;" value="" >
                                     <option value="">-Select-</option>
 								    <?php foreach($clientlist as $key=>$values){ ?>
 									   <option value="<?php echo $values["clientId"];?>"><?php echo $values["clientName"]?></option>
@@ -146,7 +146,7 @@ elseif($_GET['i'] == "0")
 	
 	
 
-<script language="javascript" src="js/validate.js"></script>
+    <script language="javascript" src="js/validate.js"></script>
 	<script language="javascript">	
 		var toValidateElem = {
             'txtName' : new Array('empty',true),
@@ -164,6 +164,21 @@ elseif($_GET['i'] == "0")
 		}
 		var _formId = "frmuser";
 		var _submitId = "sbnAddUser";
+        function loadClients(pid){
+            $.ajax({
+                type: "POST", url: 'contractsaction.php', data: "id="+pid+"&hAct=4",dataType: "JSON",
+                success: function(data){
+                    optionHtml = '<option value="">-Select-</option>';
+                    if(data != 0){
+                        $.each(data, function(i, item){
+                            optionHtml = optionHtml+'<option value='+item.clientId+'>'+item.clientName+'</option>';
+                        });
+                    }
+                    $("#clientId").html(optionHtml);
+                }
+            });
+
+        }
 	</script>
 	
 </body>

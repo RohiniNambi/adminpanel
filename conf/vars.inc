@@ -13,8 +13,6 @@ $_LOGFILEPATH = "/var/log/";
 
 $_USERTYPES = array(1=>"Administrator",3=>"Store Man",4=>"Driver",5=>"Supervisor");
 $_MEASUREMENTS = array(1=>"Unit",2=>"Ltr");
-
-
-
+$_UNITS = array(1=>"m2", 2=>"m3",3=>"Hrs",4=>"mL",5=>"No's");
 
 ?>

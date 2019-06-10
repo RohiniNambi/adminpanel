@@ -73,7 +73,7 @@ foreach($teamlist as $value){
 				<td><?php echo $teamName[$workerval["teamId"]];?></td>				
 				<td><?php echo date("d-M-Y",strtotime($workerval["createdOn"]));?></td>
 				
-				<td><a href="#" onclick='_getBox("editworkers.php?page=Edit&ac=<?php echo $commonObj->Encrypt($workerval["workerId"]);?>","40%","35%")'><img src="images/edit.gif" border="0" alt="edit" title="Edit"></a> &nbsp; &nbsp;<a href="javascript:void(0)" onclick="confimuser('<?php echo $commonObj->Encrypt($workerval["workerId"]);?>','<?php echo $i?>');"><img src="images/close.gif" border="0" alt="Delete" title="Delete"></td>
+				<td><a href="#" onclick='_getBox("editworkers.php?page=Edit&ac=<?php echo $commonObj->Encrypt($workerval["workerId"]);?>","40%","40%")'><img src="images/edit.gif" border="0" alt="edit" title="Edit"></a> &nbsp; &nbsp;<a href="javascript:void(0)" onclick="confimuser('<?php echo $commonObj->Encrypt($workerval["workerId"]);?>','<?php echo $i?>');"><img src="images/close.gif" border="0" alt="Delete" title="Delete"></td>
 				
 			</tr>
 			<?php

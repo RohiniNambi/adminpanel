@@ -134,9 +134,8 @@ class WORKERS
 		$dbcon=$db->connect('S',$DBNAME["LMS"],$DBINFO["USERNAME"],$DBINFO["PASSWORD"]);
 		
 		$selectFileds=array("teamid");
-		$whereClause = "teamName = '".trim($postArr["txtName"]);
+		$whereClause = "teamName = '".trim($postArr["txtName"])."'";
 		$res=$db->select($dbcon,$DBNAME["LMS"],$TABLEINFO["TEAM"],$selectFileds,$whereClause);
-		
 		if($res[1] > 0){
 			$returnval = 0;
 		}else{

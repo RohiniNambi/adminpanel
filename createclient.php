@@ -6,6 +6,12 @@ if(trim($session_id) == ""){
 	$commonObj->RedirectTo('logout.php');
 }
 
+$contracts = new PROJECTS;
+$projectlist = $contracts->getProjectList();
+$projectNameList = array();
+foreach($projectlist as $value){
+    $projectNameList[$value["projectId"]]=$value["projectName"];
+}
 
 if($_GET['i'] == "1")
 	$success = "Client Created Successfully";
@@ -41,7 +47,8 @@ elseif($_GET['i'] == "0")
 	<div align="center">
 		<br>
             <form name="frmuser" id="frmuser" method="post" action="clientaction.php">
-		<input type="hidden" name="hAct" value="1">         
+		<input type="hidden" name="hAct" value="1">   
+		<input type="hidden" name="createdBy" value="<?php echo trim($session_id);?>">      
                 <div class="mediumtxt boldtxt errortxt" align="center"><?php echo $error;?></div>
 	        <div class="mediumtxt boldtxt successtxt" align="center"><?php echo $success;?></div>
                 <table cellpadding="0" cellspacing="0" border="0" class="mediumtxt">			
@@ -53,6 +60,18 @@ elseif($_GET['i'] == "0")
                             <td align="right">Client Name<strong style="color:#FE1100;padding-left:5px;">*</strong></td>
                             <td>:</td>
                             <td><input type="text" name="txtName" id="txtName" value="" style="width:250px;" maxlength="60"></td>
+                    </tr>
+                    <tr>
+                            <td align="right">Project<strong style="color:#FE1100;padding-left:5px;">*</strong></td>
+                            <td>:</td>
+                            <td>
+                            <select name="projectId" id="projectId" style="width:250px;">
+                                    <option value="">-Select-</option>
+								    <?php foreach($projectNameList as $key=>$values){
+								     ?>
+									   <option value="<?php echo $key;?>"><?php echo $values;?></option>							
+								    <?php }?>
+                            	</select>
                     </tr>
 		    
 			    <td colspan="2"></td>
@@ -75,7 +94,8 @@ elseif($_GET['i'] == "0")
 
 	<script language="javascript">	
 		var toValidateElem = {
-			'txtName' : new Array('empty',true)
+			'txtName' : new Array('empty',true),
+			'projectId' : new Array('empty', true)
 		}
 		var toDisplayError = {
 			'empty' : 'Must not be empty'

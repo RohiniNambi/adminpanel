@@ -1,5 +1,6 @@
 <?php
 include_once "./includes/class.scaffold.php";
+
 if(trim($session_id) == ""){
 	 $commonObj->RedirectTo('logout.php');
 }
@@ -10,14 +11,20 @@ if(trim($session_type) != 1){
 }
 
 $scaffold = new SCAFFOLD;
-$scaffoldlist = $scaffold->getScaffoldList();
+$scaffoldlist = $scaffold->getScaffoldSubCategoryList();
+
+$categoryList = $scaffold->getScaffoldList();
+$catTypeIdList = array();
+foreach($categoryList as $det){
+	$catTypeIdList[$det["id"]] = $det["scaffoldName"];
+}
 
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-	<title>:: Scaffold Type ::</title>
+	<title>:: Scaffold Sub Category ::</title>
 	<style>
 		@import "css/style.css";		
 		@import "css/tab.css";	
@@ -40,13 +47,13 @@ $scaffoldlist = $scaffold->getScaffoldList();
 		
 		<input type="hidden" name="hdnAction" id="hdnAction">
 			<br>
-		<a href="createscaffold.php"><input type="button" name="createuser" value="Create a Scaffold" class="button"></a>
+		<a href="createscaffoldsubcategory.php"><input type="button" name="createuser" value="Create a Scaffold Sub Category" class="button"></a>
 		<br><br>
 		<table cellpadding="1" cellspacing="1" border="0" bgcolor="#EEEEEE" width="100%" class="mediumtxt">
 			<tr bgcolor="#EEEEEE">
 				<th>&nbsp;</th>				
-				<th>Scaffold Name</th>
-				<th>Status</th>
+				<th>Scaffold Sub Category Name</th>
+				<th>Scaffold Category</th>
 				<th>Action</th>
 				
 			</tr>
@@ -60,10 +67,11 @@ $scaffoldlist = $scaffold->getScaffoldList();
 			?>
 			<tr id="row_<?php echo $i?>" bgcolor="#FFFFFF">
 				<td><?php echo $i?></td>				
-				<td><?php echo $scaffoldval["scaffoldName"];?></td>
-				<td><?php if($scaffoldval["status"] == 1) { echo "Active";} else{ echo "Closed";}?></td>				
+				<td><?php echo $scaffoldval["scaffoldSubCatName"];?></td>
+				<td><?php echo $catTypeIdList[$scaffoldval["scaffoldTypeId"]];?></td>				
                              
-				<td><a href="#" onclick='_getBox("editscaffold.php?page=Edit&ac=<?php echo $commonObj->Encrypt($scaffoldval["id"]);?>","50%","50%")'><img src="images/edit.gif" border="0" alt="edit" title="Edit"></a> &nbsp;<!-- <a onclick='_getBox("viewuser.php?i={$userslist[$key].uid|base64_encode}","35%","75%")' href="javascript:void(0)"><img src="images/view.gif" border="0" alt="view" title="View"></a>&nbsp;-->&nbsp;<a href="javascript:void(0)" onclick="confimuser('<?php echo $commonObj->Encrypt($scaffoldval["id"]);?>','<?php echo $i?>');"><img src="images/close.gif" border="0" alt="Delete" title="Delete"></td>
+				<td><a href="#" onclick='_getBox("editscaffoldsubcategory.php?page=Edit&ac=<?php echo $commonObj->Encrypt($scaffoldval["scaffoldSubCateId"]);?>","50%","50%")'><img src="images/edit.gif" border="0" alt="edit" title="Edit"></a> 
+					<a href="javascript:void(0)" onclick="confimuser('<?php echo $commonObj->Encrypt($scaffoldval["scaffoldSubCateId"]);?>','<?php echo $i?>');"><img src="images/close.gif" border="0" alt="Delete" title="Delete"></td>
 				
 			</tr>
 			<?php
@@ -103,7 +111,7 @@ $scaffoldlist = $scaffold->getScaffoldList();
 		function DeleteUser(id){						
 			str = id.split('~~~~~');
 			$.ajax({
-				type: "POST", url: 'scaffoldaction.php', data: "id="+str[0]+"&hAct=3",
+				type: "POST", url: 'scaffoldsubcategoryaction.php', data: "id="+str[0]+"&hAct=3",
 				complete: function(data){
 					$('#row_'+str[1]).hide('slow');
 				}

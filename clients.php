@@ -13,6 +13,12 @@ if(trim($session_type) == 3){
 $projects = new PROJECTS;
 $clientlist = $projects->getClientList();
 
+$projectlist = $projects->getProjectList();
+$projectNameList = array();
+foreach($projectlist as $value){
+    $projectNameList[$value["projectId"]]=$value["projectName"];
+}
+$projectNameList[0]="";
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
@@ -47,7 +53,7 @@ $clientlist = $projects->getClientList();
 			<tr bgcolor="#EEEEEE">
 				<th>&nbsp;</th>				
 				<th>Client Name</th>
-				
+				<th>Projects </th>
 				<th>Status</th>
 			
 				<th>Action</th>
@@ -63,7 +69,7 @@ $clientlist = $projects->getClientList();
 			<tr id="row_<?php echo $i?>" bgcolor="#FFFFFF">
 				<td><?php echo $i?></td>				
 				<td><?php echo $clientval["clientName"];?></a></td>
-				
+				<td><?php echo $projectNameList[$clientval['projects']];?></td>
 				<td><?php if($clientval["status"] == 1) { echo "Active";} else{ echo "In Active";}?></td>
 				
 				<td><a href="#" onclick='_getBox("editclient.php?page=Edit&ac=<?php echo $commonObj->Encrypt($clientval["clientId"]);?>","40%","40%")'><img src="images/edit.gif" border="0" alt="edit" title="Edit"></a> &nbsp; &nbsp;<a href="javascript:void(0)" onclick="confimuser('<?php echo $commonObj->Encrypt($clientval["clientId"]);?>','<?php echo $i?>');"><img src="images/close.gif" border="0" alt="Delete" title="Delete"></td>

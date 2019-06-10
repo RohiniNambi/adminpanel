@@ -11,6 +11,48 @@ class PROJECTS
 		$this->common = $commonObj;
 	}
 
+	function getClientListBasedonPjt($pid){
+		global $DBINFO,$TABLEINFO,$SERVERS,$DBNAME;
+		$db = new DB;
+		$dbcon = $db->connect('S',$DBNAME["LMS"],$DBINFO["USERNAME"],$DBINFO["PASSWORD"]);
+		
+		$selectFileds=array("clientId","clientName","projects","status");
+		$whereClause = "projects = ".$pid." and status != 9";
+		$res=$db->select($dbcon,$DBNAME["LMS"],$TABLEINFO["CLIENTS"],$selectFileds,$whereClause);
+	
+		if($res[1] > 0){
+			$userInfo = $db->fetchArray($res[0],1);
+			$returnval = $userInfo;
+		}
+		else{
+			$returnval = 0; 
+		}
+		$db->dbClose();
+		
+		return $returnval;
+	}
+
+	function loadClientBasedonPjts($pid){
+		global $DBINFO,$TABLEINFO,$SERVERS,$DBNAME;
+		$db = new DB;
+		$dbcon = $db->connect('S',$DBNAME["LMS"],$DBINFO["USERNAME"],$DBINFO["PASSWORD"]);
+		
+		$selectFileds=array("clientId","clientName","projects","status");
+		$whereClause = "projects = ".$pid." and status != 9";
+		$res=$db->select($dbcon,$DBNAME["LMS"],$TABLEINFO["CLIENTS"],$selectFileds,$whereClause);
+	
+		if($res[1] > 0){
+			$userInfo = $db->fetchArray($res[0],1);
+			$returnval = $userInfo;
+		}
+		else{
+			$returnval = 0; 
+		}
+		$db->dbClose();
+		
+		echo json_encode($returnval);
+	}
+
 	function getProjectList(){
 		global $DBINFO,$TABLEINFO,$SERVERS,$DBNAME;
 		$db = new DB;
@@ -149,8 +191,9 @@ class PROJECTS
 		if($res[1] > 0){
 			$returnval = 0;
 		}else{
-			$insertArr["clientName"]=trim($postArr["txtName"]);			
-			
+			$insertArr["clientName"]=trim($postArr["txtName"]);
+			$insertArr["projects"]=trim($postArr["projectId"]);
+			$insertArr["createdBy"]=trim($postArr["createdBy"]);
 			$dbm = new DB;
 			$dbcon2 = $dbm->connect('M',$DBNAME["LMS"],$DBINFO["USERNAME"],$DBINFO["PASSWORD"]);
 			$insid = $dbm->insert($dbcon2,$DBNAME["LMS"],$TABLEINFO["CLIENTS"],$insertArr,1,2);
@@ -165,7 +208,7 @@ class PROJECTS
 		$db = new DB;
 		$dbCon = $db->connect('S',$DBNAME["LMS"],$DBINFO["USERNAME"],$DBINFO["PASSWORD"]);
 		
-		$selectFileds=array("clientName","clientId","status");
+		$selectFileds=array("clientName","clientId","status","projects");
 		$whereClause = "status != 9";
 		$res=$db->select($dbCon, $DBNAME["LMS"],$TABLEINFO["CLIENTS"],$selectFileds,$whereClause);
 		
@@ -186,7 +229,7 @@ class PROJECTS
 		$db = new DB;
 		$dbCon = $db->connect('S',$DBNAME["LMS"],$DBINFO["USERNAME"],$DBINFO["PASSWORD"]);
 		
-		$selectFileds=array("clientName","clientId","status");
+		$selectFileds=array("clientName","clientId","status","projects");
 		$whereClause = "clientId = $cid";
 		$res=$db->select($dbCon,$DBNAME["LMS"],$TABLEINFO["CLIENTS"],$selectFileds,$whereClause);
 		
@@ -209,13 +252,14 @@ class PROJECTS
 		$whereClasue = "clientId = ".$this->common->Decrypt($postArr['cid']);
 		$insertArr["clientName"]=trim($postArr["txtName"]);
 		$insertArr["status"]=trim($postArr["status"]);
+		$insertArr["projects"]=trim($postArr["projectId"]);
+		$insertArr["modifiedBy"]=trim($postArr["modifiedBy"]);			
 		
 		$dbm = new DB;
 		$dbcon = $dbm->connect('M',$DBNAME["LMS"],$DBINFO["USERNAME"],$DBINFO["PASSWORD"]);
 		$insid = $dbm->update($dbcon,$DBNAME["LMS"],$TABLEINFO["CLIENTS"],$insertArr,$whereClasue);
 		$dbm->dbClose();
-		if($insid == 0 || $insid == ''){ $returnval = 2; }else { $returnval = 1; }
-		
+		if($insid == 0 || $insid == ''){ $returnval = 2; }else { $returnval = 1; }		
 		return $returnval;
 	}
 	

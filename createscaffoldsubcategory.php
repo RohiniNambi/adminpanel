@@ -17,13 +17,19 @@ elseif($_GET['i'] == "2")
 	$error = "Error!! Please try again";
 elseif($_GET['i'] == "0")
 	$error = "Scaffold name already exists.";	
+$scaffold = new SCAFFOLD;
+$categoryList = $scaffold->getScaffoldList();
+$catTypeIdList = array();
+foreach($categoryList as $det){
+	$catTypeIdList[$det["id"]] = $det["scaffoldName"];
+}
 
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-	<title>:: Create Scaffold ::</title>
+	<title>:: Create Scaffold Sub Category::</title>
 	<style>
 		@import "css/style.css";
 		@import "css/validate.css";		
@@ -44,7 +50,7 @@ elseif($_GET['i'] == "0")
 
 	<div align="center">
 		<br>
-            <form name="frmuser" id="frmuser" method="post" action="scaffoldaction.php">
+            <form name="frmuser" id="frmuser" method="post" action="scaffoldsubcategoryaction.php">
 		<input type="hidden" name="hAct" value="1">
 		<input type="hidden" name="createdBy" value="<?php echo trim($session_id);?>">         
                 <div class="mediumtxt boldtxt errortxt" align="center"><?php echo $error;?></div>
@@ -52,12 +58,23 @@ elseif($_GET['i'] == "0")
                 <table cellpadding="0" cellspacing="0" border="0" class="mediumtxt">			
                     <tr>	
 			    <td colspan="2"></td>
-                            <td><strong class="bigtxt">Add Scaffold</strong></td>				
+                            <td><strong class="bigtxt">Add Scaffold Sub Category</strong></td>				
                     </tr>
                     <tr>
-                            <td align="right">Scaffold Name<strong style="color:#FE1100;padding-left:5px;">*</strong></td>
+                            <td align="right">Scaffold Sub Category Name<strong style="color:#FE1100;padding-left:5px;">*</strong></td>
                             <td>:</td>
                             <td><input type="text" name="txtName" id="txtName" value="" style="width:250px;"></td>
+                    </tr>
+                    <tr>
+                    	
+                            <td align="right">Scaffold Type<strong style="color:#FE1100;padding-left:5px;">*</strong></td>
+                            <td>:</td>
+                            <td><select name="typeId" id="typeId" onchange="return chkUserType(this.value);">
+                            	<option value="">-Select-</option>
+                            	<?php foreach($catTypeIdList as $key=>$val){ ?>
+                            		<option value="<?php echo $key;?>"><?php echo $val;?></option>
+                            	<?php }?>                                
+						</select></td>
                     </tr>
 
                     <tr>
@@ -82,7 +99,7 @@ elseif($_GET['i'] == "0")
 	<script language="javascript">	
 		var toValidateElem = {
 			'txtName' : new Array('empty',true),
-			'status' : new Array('empty',true),
+			'typeId' : new Array('empty',true),
 		}
 		var toDisplayError = {
 			'empty' : 'Must not be empty'
