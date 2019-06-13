@@ -87,12 +87,12 @@ elseif($_GET['i'] == "0")
                                 </select>
                             </td>
                     </tr>
-					<tr id="projectdiv" style="visibility:hidden">
+					<tr id="projectdiv">
                             <td align="right">Projects<strong style="color:#FE1100;padding-left:5px;">*</strong></td>
                             <td>:</td>
                             <td>
-                                <select style="width:250px" name="projects[]" id="projects" multiple onchange="">
-                                    
+                                <select style="width:250px" name="selProjects[]" id="selProjects" multiple="multiple">
+                         		<option value="0">-Select-</option>           
 				    <?php
 				    foreach($projectList as $key=>$values){
 				    ?>
@@ -122,7 +122,7 @@ elseif($_GET['i'] == "0")
 		
 </center>
 	
-	<script language="javascript" src="js/validate.js"></script>
+
 
 	<script language="javascript">	
 		var toValidateElem = {
@@ -131,25 +131,42 @@ elseif($_GET['i'] == "0")
 			'txtPassword' : new Array('empty',true),
 			'txtEmail' : new Array('email',false),
 			'selUsertype' : new Array('empty',true),
-			'is_empty_withCond':new Array('emptywithcond', true, document.getElementById("selUsertype").value==5),
+			'selProjects' : new Array('select',true, document.getElementById("selUsertype").value==5)
 		}
 		var toDisplayError = {
 			'empty' : 'Must not be empty',
+			'select' : 'Must not be empty',
 			'email' : 'Invalid email'
 		}
 		var _formId = "frmuser";
 		var _submitId = "sbnAddUser";
 
-		function chkUserType(e){document.getElementById("projectdiv")
+		function chkUserType(e){
 			if(e.value == 5){
 				document.getElementById("projectdiv").style.visibility="visible";
-
+				document.getElementById("selProjects").hidden=false;
 			}
 			else{
 				document.getElementById("projectdiv").style.visibility="hidden";
+				document.getElementById("selProjects").hidden=true;
+				//document.getElementById("selProjectsInfo").hidden=true;
+				if($('#selProjectsInfo').length >0){
+					var Info = $('#selProjectsInfo');
+					ele = $("#selProjects");
+								console.log(ele);
+
+					var pos = ele.offset();
+					Info.css({
+						top: pos.top-3,
+						left: pos.left+ele.width()+15
+					});
+					Info.removeClass('error').addClass('correct').html('&radic;').hide();
+					ele.removeClass('wrong').addClass('normal');
+				}
+				
 			}
 		}
 	</script>
-	
+	<script language="javascript" src="js/validate.js"></script>	
 </body>
 </html>

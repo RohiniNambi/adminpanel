@@ -79,7 +79,7 @@ elseif($_GET['i'] == "2")
                             <td align="right">User Type<strong style="color:#FE1100;padding-left:5px;">*</strong></td>
                             <td>:</td>
                             <td>
-                                <select name="selUsertype" id="selUsertype" onchange="return chkUserType(this.value);">
+                                <select name="selUsertype" id="selUsertype" onchange="return chkUserType(this);">
                                     <option value="">-Select-</option>
 				      <?php
 				    foreach($_USERTYPES as $key=>$values){
@@ -96,8 +96,8 @@ elseif($_GET['i'] == "2")
                             <td align="right">Projects<strong style="color:#FE1100;padding-left:5px;">*</strong></td>
                             <td>:</td>
                             <td>
-                                <select style="width:250px" name="projects[]" id="projects" multiple onchange="" <?php if($usersDetails['userType'] == 5){ echo "visible"; } else{ echo "hidden"; }?> <?php /*if($usersDetails['userType'] != 5){ echo "disabled"; } else echo "required";*/  ?>>
-                         <option value="">-Select-</option>           
+                                <select style="width:250px" name="selProjects[]" id="selProjects" multiple="multiple" >
+                         <option value="0">-Select-</option>           
 				    <?php
 				    foreach($projectList as $key=>$values){
 				    ?>
@@ -122,35 +122,48 @@ elseif($_GET['i'] == "2")
 		
 </center>
 	<script language="javascript" src="js/jquery.js"></script>
-	<script language="javascript" src="js/validate.js"></script>
-
+	
 	<script language="javascript">	
 		var toValidateElem = {
-			'projects' : new Array('empty',true),
 			'txtName' : new Array('empty',true),
 			'txtUsername' : new Array('empty',true),
 			'txtEmail' : new Array('email',false),
-			'selUsertype' : new Array('empty',true)
-		}
+			'selUsertype' : new Array('empty',true),
+			'selProjects' : new Array('select',true, document.getElementById("selUsertype").value==5)		}
 		var toDisplayError = {
 			'empty' : 'Must not be empty',
+			'select' : 'Must not be empty',
 			'email' : 'Invalid email'
 		}
 		var _formId = "frmuser";
 		var _submitId = "sbnAddUser";
 
-			function chkUserType(e){
-				
-				val = document.getElementById("selUsertype").value;
-			if(val == "5"){
-			
+		function chkUserType(e){				
+			if(e.value == 5){
 				document.getElementById("projectdiv").style.visibility="visible";
+				document.getElementById("selProjects").hidden=false;
 			}
 			else{
 				document.getElementById("projectdiv").style.visibility="hidden";
+				document.getElementById("selProjects").hidden=true;
+				if($('#selProjectsInfo').length >0){
+					var Info = $('#selProjectsInfo');
+					ele = $("#selProjects");
+								console.log(ele);
+
+					var pos = ele.offset();
+					Info.css({
+						top: pos.top-3,
+						left: pos.left+ele.width()+15
+					});
+					Info.removeClass('error').addClass('correct').html('&radic;').hide();
+					ele.removeClass('wrong').addClass('normal');
+				}
+				
 			}
 		}
 	</script>
-	
+	<script language="javascript" src="js/validate.js"></script>
+
 </body>
 </html>

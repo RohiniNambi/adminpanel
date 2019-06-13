@@ -2,18 +2,23 @@ $(document).ready(function(){
 	
 var jv = {
 	'is_empty_withCond' : function(o,conditn,msg,req){
-		console.log("conditn",conditn);
 		if(req == false && conditn == false){ return true; }		
 		var re = /\s/g; 
 		RegExp.multiline = true;
-		var str = o.val().replace(re, "");
-		if (str.length == 0 && conditn == true) {
+		var str = o.val();
+		var leng = 0;
+		if(str!=null && str!=0){
+			//str = o.val().replace(re, "");
+			leng = str.length;
+		}
+				
+		if (leng == 0) {
 			jv.errors = true;
-			DispErr(o,msg);
+			DispErr_MultiSelect(o,conditn);
 			return false;
 		}
 		else{
-			RemoveErr(o);
+			RemoveErr_MultiSelect(o);
 			return true;
 		}
 	},
@@ -141,6 +146,29 @@ var jv = {
 	}
 }
 
+var DispErr_MultiSelect = function(ele, msg){
+	$('body').append('<div id="'+ele.attr('id')+'Info" class="info"></div>');	
+	var pos = ele.offset();
+	var Info = $('#'+ele.attr('id')+'Info');
+	Info.css({
+		top: pos.top-3,
+		left: pos.left+ele.width()+15
+	});
+	Info.removeClass('correct').addClass('error').html(msg).show();
+	ele.removeClass('normal').addClass('wrong').css({'font-weight': 'normal'});
+}
+
+var RemoveErr_MultiSelect = function(ele){
+	$('body').append('<div id="'+ele.attr('id')+'Info" class="info"></div>');	
+	var pos = ele.offset();
+	var Info = $('#'+ele.attr('id')+'Info');
+	Info.css({
+		top: pos.top-3,
+		left: pos.left+ele.width()+15
+	});
+	Info.removeClass('error').addClass('correct').html('&radic;').hide();
+	ele.removeClass('wrong').addClass('normal');
+}
 
 var DispErr = function(ele, msg){
 	$('body').append('<div id="'+ele.attr('name')+'Info" class="info"></div>');	
@@ -167,7 +195,7 @@ var RemoveErr = function(ele){
 
 var functionsName={
 	'empty' : jv.is_empty,
-	'select' : jv.is_empty,
+	'select' : jv.is_empty_withCond,
 	'email' : jv.is_email,
 	'number' : jv.is_number,
 	'float' : jv.is_float,	
@@ -180,8 +208,7 @@ var functionsName={
 
 $._SetElmOnblur = function (){
 	
-	$.each(toValidateElem, function(id,funcName){
-		
+	$.each(toValidateElem, function(id,funcName){		
 		var fn = funcName[0].split(',');
 		if(funcName[0] == "either3"){
 			var val = $("#"+id).val();		
@@ -213,8 +240,7 @@ $._onClickSubmit = function(){
 	jv.errors =false;
 	var obj = $.browser.webkit ? $('body') : $('html');
 	//obj.animate({ scrollTop: $('#'+_formId).offset().top }, 750, function (){
-		$.each(toValidateElem, function(id,funcName){
-			
+		$.each(toValidateElem, function(id,funcName, condn=false){
 		var fn = funcName[0].split(',');		
 			$.each(fn, function(i,v){
 				var fName = functionsName[v];
