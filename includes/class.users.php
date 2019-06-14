@@ -78,7 +78,7 @@ class USERS extends PROJECTS
 			$insertArr["userType"]=trim($postArr["selUsertype"]);
 			$insertArr["createdBy"]=trim($postArr["createdBy"]);
 			if($postArr["selUsertype"] == 5){
-				$insertArr["project"]=implode(",",$postArr["projects"]);
+				$insertArr["project"]=implode(",",$postArr["selProjects"]);
 			}else{
 				$insertArr["project"]='0';
 			}
@@ -104,7 +104,7 @@ class USERS extends PROJECTS
 		$insertArr["Name"]=trim($postArr["txtName"]);
 		
 		if($postArr["selUsertype"] == 5){
-			$insertArr["project"]=implode(",",$postArr["projects"]);
+			$insertArr["project"]=implode(",",$postArr["selProjects"]);
 		}
 		if($postArr["txtPassword"] != "")
 			$insertArr["password"]=md5(trim($postArr["txtPassword"]));
