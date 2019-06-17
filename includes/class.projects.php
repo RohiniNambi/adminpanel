@@ -307,7 +307,7 @@ class PROJECTS
 		$dbcon=$db->connect('S',$DBNAME["LMS"],$DBINFO["USERNAME"],$DBINFO["PASSWORD"]);
 		
 		$selectFileds=array("id");
-		$whereClause = "projectId = '".trim($postArr["projectId"])."' and clientId='".trim($postArr['clientId'])."'";
+		$whereClause = "projectId = '".trim($postArr["projectId"])."' and clientId='".trim($postArr['clientId'])."' and item = '".trim($postArr["txtItem"])."'";
 		$res=$db->select($dbcon,$DBNAME["LMS"],$TABLEINFO["CONTRACTS"],$selectFileds,$whereClause);
 		if($res[1] > 0){
 			$returnval = 0;
@@ -335,9 +335,9 @@ class PROJECTS
 	function editContract($postArr){
 		global $DBINFO,$TABLEINFO,$SERVERS,$DBNAME;		
 		$whereClasue = "id = ".$this->common->Decrypt($postArr['wid']);
-		$insertArr["projectId"]=trim($postArr["projectId"]);
-		$insertArr["clientId"]=trim($postArr["clientId"]);
-		$insertArr["item"]=trim($postArr["txtItem"]);
+		//$insertArr["projectId"]=trim($postArr["projectId"]);
+		//$insertArr["clientId"]=trim($postArr["clientId"]);
+		//$insertArr["item"]=trim($postArr["txtItem"]);
 		$insertArr["location"]=trim($postArr["txtLocation"]);
 		$insertArr["length"]=trim($postArr["txtLength"]);
 		$insertArr["height"]=trim($postArr["txtHeight"]);
@@ -350,7 +350,6 @@ class PROJECTS
 		$insid = $dbm->update($dbcon,$DBNAME["LMS"],$TABLEINFO["CONTRACTS"],$insertArr,$whereClasue);
 		$dbm->dbClose();
 		if($insid == 0 || $insid == ''){ $returnval = 2; }else { $returnval = 1; }
-		
 		return $returnval;
 	}
 

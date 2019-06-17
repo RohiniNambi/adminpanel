@@ -126,7 +126,7 @@ elseif($_GET['i'] == "0")
                             <td align="right">Sets<strong style="color:#FE1100;padding-left:5px;">*</strong></td>
                             <td>:</td>
                             <td>
-                                <input type="text" name="txtSets" id="txtSets" maxlength="10" value="<?php echo $contractDetail['sets']?>" onkeypress="return allowNumericNotdecimal(event);"></td>
+                                <input type="text" autocomplete="off" name="txtSets" id="txtSets" maxlength="10" value="<?php echo $contractDetail['sets']?>" onkeypress="return allowNumericNotdecimal(event);"></td>
                     </tr>	    
 			    <td colspan="2"></td>
                             <td><input type="submit" name="sbnAddUser" id="sbnAddUser" value="Submit" class="button"></td>				

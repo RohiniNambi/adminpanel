@@ -58,15 +58,20 @@ elseif($_GET['i'] == "2")
                             <td>&nbsp;</td>				
                     </tr>
                     <tr>
-                            <td align="right">Range<strong style="color:#FE1100;padding-left:5px;">*</strong></td>
+                            <td align="right">Range From<strong style="color:#FE1100;padding-left:5px;">*</strong></td>
                             <td>:</td>
-                            <td><input type="text" name="txtRange" id="txtRange" value="<?php echo $gradeDetails['gradeRange'];?>" style="width:250px;" onkeypress="return allowNumeric(event);"></td>
-                            
+                            <td><input type="text" name="txtRangeFrom" id="txtRangeFrom" value="<?php echo $gradeDetails['gradeRangeFrom'];?>" style="width:250px;" onkeypress="return allowNumeric(event);"></td>
+                     </tr>
+                     <tr>
+
+                            <td align="right">Range To <strong style="color:#FE1100;padding-left:5px;">*</strong></td>
+                            <td>:</td>
+                            <td><input type="text" name="txtRangeTo" id="txtRangeTo" value="<?php echo $gradeDetails['gradeRangeTo'];?>" style="width:250px;" onkeypress="return allowNumeric(event);"></td>
                     </tr>
 		     <tr>
                             <td align="right">Percentage</td>
                             <td>:</td>
-                            <td><input type="text" name="txtPercent" id="txtPercent" value="<?php echo $gradeDetails['Percentage'];?>" style="width:250px;" onkeypress="return allowNumeric(event);"></td>
+                            <td><input type="text" name="txtPercent" id="txtPercent" value="<?php echo $gradeDetails['Percentage'];?>" style="width:250px;" onkeypress="return allowPercent(event);"></td>
                     </tr>
                     <tr>
                             <td align="right">Grade<strong style="color:#FE1100;padding-left:5px;">*</strong></td>
@@ -92,7 +97,8 @@ elseif($_GET['i'] == "2")
 
 	<script language="javascript">	
 		var toValidateElem = {
-			'txtRange' : new Array('empty',true),
+			'txtRangeFrom' : new Array('empty',true),
+			'txtRangeTo' : new Array('empty',true),
 			'txtPercent' : new Array('empty',true),
 			'txtGrade' : new Array('empty',true)
 		}
@@ -103,17 +109,31 @@ elseif($_GET['i'] == "2")
 		var _formId = "frmuser";
 		var _submitId = "sbnAddUser";
 
-			function chkUserType(e){
-				
-				val = document.getElementById("selUsertype").value;
-			if(val == "5"){
-			
-				document.getElementById("projectdiv").style.visibility="visible";
+		function allowPercent(e){
+			var num_valid = false;
+			if (!e) var e = window.event;
+			if(!e.which) key = e.keyCode;
+			else key = e.which;	
+			if((key>=48)&&(key<=57)||key==8||key==9||key==32||key==45|| key==43||key==39||key==37 ||key==13 ||key==46){
+				key=key;
+				num_valid = true;
+			}
 
+			var enterval = document.getElementById("txtPercent").value;
+			if(num_valid){
+				if(enterval.length == 1 || enterval.length == 0){
+					num_valid = true;
+				}else if(enterval.length== 2){
+					var newval = enterval + e.key;
+					if(newval>100) num_valid = false;
+					else num_valid = true;
+				}else{
+					num_valid = false;
+				}
+			}else{
+				num_valid = false;
 			}
-			else{
-				document.getElementById("projectdiv").style.visibility="hidden";
-			}
+			return num_valid;
 		}
 	</script>
 	

@@ -50,7 +50,7 @@ elseif($_GET['i'] == "2")
 	<div >
 	<div>
 	
-<div></div><strong class="bigtxt">Edit Scaffold</strong></div>
+<div></div><strong class="bigtxt">Edit Scaffold Sub Category</strong></div>
 	<div align="center">
 		<br>
             <form name="frmuser" id="frmuser" method="post" action="scaffoldsubcategoryaction.php">
@@ -65,12 +65,6 @@ elseif($_GET['i'] == "2")
                             <td>&nbsp;</td>				
                     </tr>
                     <tr>
-                            <td align="right">Name<strong style="color:#FE1100;padding-left:5px;">*</strong></td>
-                            <td>:</td>
-                            <td><input type="text" name="txtName" id="txtName" value="<?php echo $scaffoldDetails['scaffoldSubCatName'];?>" style="width:250px;"></td>
-                    </tr>
-
-                    <tr>
                     	
                             <td align="right">Scaffold Type<strong style="color:#FE1100;padding-left:5px;">*</strong></td>
                             <td>:</td>
@@ -80,6 +74,11 @@ elseif($_GET['i'] == "2")
                             		<option <?php if($scaffoldDetails["scaffoldTypeId"] == $key) echo "selected"; ?> value="<?php echo $key;?>"><?php echo $val;?></option>
                             	<?php }?>                                
 						</select></td>
+                    </tr>
+                    <tr>
+                            <td align="right">Name<strong style="color:#FE1100;padding-left:5px;"></strong></td>
+                            <td>:</td>
+                            <td><input type="text" name="txtName" id="txtName" value="<?php echo $scaffoldDetails['scaffoldSubCatName'];?>" style="width:250px;" readonly="readonly"></td>
                     </tr>
 		    
                     <tr>

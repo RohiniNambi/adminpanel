@@ -105,7 +105,9 @@ $scaffoldlist = $scaffold->getScaffoldList();
 			$.ajax({
 				type: "POST", url: 'scaffoldaction.php', data: "id="+str[0]+"&hAct=3",
 				complete: function(data){
-					$('#row_'+str[1]).hide('slow');
+					//$('#row_'+str[1]).hide('slow');
+					location.reload();
+        			return;
 				}
 			});
 		}

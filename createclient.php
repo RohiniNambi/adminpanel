@@ -57,11 +57,6 @@ elseif($_GET['i'] == "0")
                             <td><strong class="bigtxt">Add Client</strong></td>				
                     </tr>
                     <tr>
-                            <td align="right">Client Name<strong style="color:#FE1100;padding-left:5px;">*</strong></td>
-                            <td>:</td>
-                            <td><input type="text" name="txtName" id="txtName" value="" style="width:250px;" maxlength="60"></td>
-                    </tr>
-                    <tr>
                             <td align="right">Project<strong style="color:#FE1100;padding-left:5px;">*</strong></td>
                             <td>:</td>
                             <td>
@@ -72,6 +67,11 @@ elseif($_GET['i'] == "0")
 									   <option value="<?php echo $key;?>"><?php echo $values;?></option>							
 								    <?php }?>
                             	</select>
+                    </tr>
+                    <tr>
+                            <td align="right">Client Name<strong style="color:#FE1100;padding-left:5px;">*</strong></td>
+                            <td>:</td>
+                            <td><input type="text" name="txtName" id="txtName" value="" style="width:250px;" maxlength="60"></td>
                     </tr>
 		    
 			    <td colspan="2"></td>

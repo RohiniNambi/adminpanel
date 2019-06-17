@@ -241,7 +241,7 @@ class SCAFFOLD
 		$db = new DB;
 		$dbcon = $db->connect('S',$DBNAME["LMS"],$DBINFO["USERNAME"],$DBINFO["PASSWORD"]);
 		
-		$selectFileds=array("id","gradeRange", "Percentage","grade");
+		$selectFileds=array("id","gradeRangeFrom","gradeRangeTo", "Percentage","grade");
 		$whereClause = "id != 0";
 		$res=$db->select($dbcon,$DBNAME["LMS"],$TABLEINFO["GRADE"],$selectFileds,$whereClause);
 	
@@ -263,17 +263,17 @@ class SCAFFOLD
 		$db = new DB;
 		$dbCon = $db->connect('S',$DBNAME["LMS"],$DBINFO["USERNAME"],$DBINFO["PASSWORD"]);
 		$selectFileds=array("id");
-		$whereClause = "gradeRange = '".trim($postArr["txtRange"])."' and Percentage = '".trim($postArr["txtPercent"])."' and grade ='".trim($postArr["txtGrade"])."'";
+		$whereClause = "gradeRangeFrom = '".trim($postArr["txtRangeFrom"])."' and gradeRangeTo ='".trim($postArr["txtRangeTo"])."'";
 		$res=$db->select($dbCon, $DBNAME["LMS"],$TABLEINFO["GRADE"],$selectFileds,$whereClause);
 		
 		if($res[1] > 0){
 			$returnval = 0;
 		}else{
-			$insertArr["gradeRange"]=trim($postArr["txtRange"]);
+			$insertArr["gradeRangeFrom"]=trim($postArr["txtRangeFrom"]);
+			$insertArr["gradeRangeTo"]=trim($postArr["txtRangeTo"]);
 			$insertArr["Percentage"]=trim($postArr["txtPercent"]);
 			$insertArr["grade"]=trim($postArr["txtGrade"]);
 			$insertArr["createdBy"]= $insertArr["modifiedBy"]=trim($postArr["createdBy"]);
-
 
 			$dbm = new DB;
 			$dbCon2 = $dbm->connect('M',$DBNAME["LMS"],$DBINFO["USERNAME"],$DBINFO["PASSWORD"]);
@@ -290,8 +290,7 @@ class SCAFFOLD
 		global $DBINFO,$TABLEINFO,$SERVERS,$DBNAME;
 		$db = new DB;
 		$dbcon = $db->connect('S',$DBNAME["LMS"],$DBINFO["USERNAME"],$DBINFO["PASSWORD"]);
-		
-		$selectFileds=array("id","gradeRange", "Percentage","grade");
+		$selectFileds=array("id","gradeRangeFrom","gradeRangeTo", "Percentage","grade");
 		$whereClause = "id = $sid";
 		$res=$db->select($dbcon, $DBNAME["LMS"],$TABLEINFO["GRADE"],$selectFileds,$whereClause);
 		
@@ -308,12 +307,12 @@ class SCAFFOLD
 
 	}
 
-	function editGrade($postArr){
-		
+	function editGrade($postArr){	
 		global $DBINFO,$TABLEINFO,$SERVERS,$DBNAME;
 		
 		$whereClasue = "id = ".$this->common->Decrypt($postArr['sid']);
-		$insertArr["gradeRange"]=trim($postArr["txtRange"]);
+		$insertArr["gradeRangeFrom"]=trim($postArr["txtRangeFrom"]);
+		$insertArr["gradeRangeTo"]=trim($postArr["txtRangeTo"]);
 		$insertArr["Percentage"]=trim($postArr["txtPercent"]);
 		$insertArr["grade"]=trim($postArr["txtGrade"]);
 		$insertArr["modifiedBy"]=trim($postArr["createdBy"]);
@@ -321,8 +320,7 @@ class SCAFFOLD
 		$dbCon = $dbm->connect('M',$DBNAME["LMS"],$DBINFO["USERNAME"],$DBINFO["PASSWORD"]);
 		$insid = $dbm->update($dbCon, $DBNAME["LMS"],$TABLEINFO["GRADE"],$insertArr,$whereClasue);
 		$dbm->dbClose();
-		if($insid == 0 || $insid == ''){ $returnval = 2; }else { $returnval = 1; }
-		
+		if($insid == 0 || $insid == ''){ $returnval = 2; }else { $returnval = 1; }		
 		return $returnval;
 	}
 	

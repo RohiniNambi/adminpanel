@@ -45,9 +45,10 @@ $gradeslist = $grades->getGradesList();
 		<table cellpadding="1" cellspacing="1" border="0" bgcolor="#EEEEEE" width="100%" class="mediumtxt">
 			<tr bgcolor="#EEEEEE">
 				<th>&nbsp;</th>				
-				<th>Range</th>
 				<th>Percentage</th>
 				<th>Grade</th>
+				<th>Range From</th>
+				<th>Range To</th>
 				<th>Action</th>
 				
 			</tr>
@@ -61,10 +62,11 @@ $gradeslist = $grades->getGradesList();
 			?>
 			<tr id="row_<?php echo $i?>" bgcolor="#FFFFFF">
 				<td><?php echo $i?></td>				
-				<td><?php echo $gradeval["gradeRange"];?></td>
 				<td><?php echo $gradeval["Percentage"];?></td>
 		
 				<td><?php echo $gradeval["grade"]?></td>
+				<td><?php echo $gradeval["gradeRangeFrom"];?></td>
+				<td><?php echo $gradeval["gradeRangeTo"];?></td>
 				
                              
 				<td><a href="#" onclick='_getBox("editgrade.php?page=Edit&ac=<?php echo $commonObj->Encrypt($gradeval["id"]);?>","50%","60%")'><img src="images/edit.gif" border="0" alt="edit" title="Edit"></a> &nbsp; &nbsp;<a href="javascript:void(0)" onclick="confimuser('<?php echo $commonObj->Encrypt($gradeval["id"]);?>','<?php echo $i?>');"><img src="images/close.gif" border="0" alt="Delete" title="Delete"></td>
@@ -109,7 +111,9 @@ $gradeslist = $grades->getGradesList();
 			$.ajax({
 				type: "POST", url: 'gradeaction.php', data: "id="+str[0]+"&hAct=3",
 				complete: function(data){
-					$('#row_'+str[1]).hide('slow');
+					//$('#row_'+str[1]).hide('slow');
+					location.reload();
+        			return;
 				}
 			});
 		}

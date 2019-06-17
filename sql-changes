@@ -1,3 +1,6 @@
+ALTER TABLE `p_grade` CHANGE `gradeRange` `gradeRangeTo` INT(11) NOT NULL;
+
+ALTER TABLE `p_grade` ADD `gradeRangeFrom` INT(11) NOT NULL DEFAULT '0' AFTER `id`;
 
 ALTER TABLE `p_contracts` ADD `sets` INT(11) NOT NULL DEFAULT '0' AFTER `width`;
 
@@ -24,6 +27,7 @@ ALTER TABLE `p_scaffoldsubcatergory` CHANGE `createdOn` `createdOn` DATETIME NOT
 ALTER TABLE `p_scaffoldsubcatergory` CHANGE `modifiedOn` `modifiedOn` DATETIME on update CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP;
 
 ALTER TABLE `p_grade` CHANGE `modifiedOn` `modifiedOn` DATETIME on update CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP;
+
 
 ALTER TABLE `p_grade` CHANGE `createdOn` `createdOn` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP;
 

@@ -72,9 +72,9 @@ elseif($_GET['i'] == "2")
                     </tr>
                     <tr>
                     	
-                            <td align="right">Scaffold Type<strong style="color:#FE1100;padding-left:5px;">*</strong></td>
+                            <td align="right">Scaffold Type<strong style="color:#FE1100;padding-left:5px;"></strong></td>
                             <td>:</td>
-                            <td><select name="typeId" id="typeId" onchange="return loadSubcategory(this.value);">
+                            <td><select disabled="disabled" name="typeId" id="typeId" onchange="return loadSubcategory(this.value);">
                             	<option value="">-Select-</option>
                             	<?php foreach($catTypeIdList as $key=>$val){ ?>
                             		<option <?php if($slabDetails['scaffoldType'] == $key) echo "selected";  ?> value="<?php echo $key;?>"><?php echo $val;?></option>
@@ -82,9 +82,9 @@ elseif($_GET['i'] == "2")
 						</select></td>
                     </tr>
                     <tr>
-                            <td align="right">Scaffold Sub Category<strong style="color:#FE1100;padding-left:5px;">*</strong></td>
+                            <td align="right">Scaffold Sub Category<strong style="color:#FE1100;padding-left:5px;"></strong></td>
                             <td>:</td>
-                            <td><select name="subCatId" id="subCatId" onchange="return chkUserType(this.value);">
+                            <td><select disabled="disabled" name="subCatId" id="subCatId" onchange="return chkUserType(this.value);">
                             	<option value="">-Select-</option>
                             	<?php foreach($subcatTypeIdList as $key=>$val){ ?>
                             		<option <?php if($slabDetails['scaffoldSubCategory'] == $key) echo "selected";?> value="<?php echo $key;?>"><?php echo $val;?></option>

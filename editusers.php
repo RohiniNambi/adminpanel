@@ -96,7 +96,7 @@ elseif($_GET['i'] == "2")
                             <td align="right">Projects<strong style="color:#FE1100;padding-left:5px;">*</strong></td>
                             <td>:</td>
                             <td>
-                                <select style="width:250px" name="selProjects[]" id="selProjects" multiple="multiple" >
+                                <select name="selProjects[]" id="selProjects" multiple="multiple" style="width:250px" <?php if($usersDetails['userType'] == 5){ echo "visible"; } else{ echo "hidden"; } ?>>
                          <option value="0">-Select-</option>           
 				    <?php
 				    foreach($projectList as $key=>$values){

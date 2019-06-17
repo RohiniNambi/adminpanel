@@ -193,6 +193,19 @@ var RemoveErr = function(ele){
 	ele.removeClass('wrong').addClass('normal');
 }
 
+function checkrange(){
+	var fromRangeVal = parseInt(document.getElementById("txtRangeFrom").value);
+	var torangeVal = parseInt(document.getElementById("txtRangeTo").value);
+	if(fromRangeVal < torangeVal){
+		RemoveErr($('#txtRangeTo'));
+	}else{
+		jv.errors = true;
+		msg = 'it should be greater than Range From Field';
+		DispErr($('#txtRangeTo'),msg);
+		return false;
+	}
+}
+
 var functionsName={
 	'empty' : jv.is_empty,
 	'select' : jv.is_empty_withCond,
@@ -225,11 +238,14 @@ $._SetElmOnblur = function (){
 		}
 		if($("#"+id).attr('readonly') != true){
 			$("#"+id).blur(function(){
-				$.each(fn, function(i,v){
-					var fName = functionsName[v];
-					return fName($("#"+id),toDisplayError[v],funcName[1]);	
-				});
-				
+				if($("#"+id).val() !="" && id=='txtRangeTo'){
+					checkrange();
+				}else{
+					$.each(fn, function(i,v){
+						var fName = functionsName[v];
+						return fName($("#"+id),toDisplayError[v],funcName[1]);	
+					});
+				}
 			});
 			}		
 		
@@ -241,13 +257,18 @@ $._onClickSubmit = function(){
 	var obj = $.browser.webkit ? $('body') : $('html');
 	//obj.animate({ scrollTop: $('#'+_formId).offset().top }, 750, function (){
 		$.each(toValidateElem, function(id,funcName, condn=false){
-		var fn = funcName[0].split(',');		
-			$.each(fn, function(i,v){
-				var fName = functionsName[v];
-				if($("#"+id).is(":visible")){
-					return fName($("#"+id),toDisplayError[v],funcName[1]);
-				}
-			});		
+			if(id=='txtRangeTo'){
+				checkrange();
+			}else{
+				var fn = funcName[0].split(',');		
+				$.each(fn, function(i,v){
+					var fName = functionsName[v];
+					if($("#"+id).is(":visible")){
+						return fName($("#"+id),toDisplayError[v],funcName[1]);
+					}
+				});
+			}
+					
 		});
 		jv.submit();
 	//});

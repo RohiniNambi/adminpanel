@@ -56,16 +56,10 @@ foreach($projectlist as $value){
                             <td></td>				
                     </tr>
                     <tr>
-                            <td align="right">Client Name<strong style="color:#FE1100;padding-left:5px;">*</strong></td>
-                            <td>:</td>
-                            <td><input type="text" name="txtName" id="txtName" value="<?php echo $clientdetails["clientName"];?>" style="width:250px;" maxlength="60"></td>
-                    </tr>
-
-                    <tr>
-                            <td align="right">Project<strong style="color:#FE1100;padding-left:5px;">*</strong></td>
+                            <td align="right">Project<strong style="color:#FE1100;padding-left:5px;"></strong></td>
                             <td>:</td>
                             <td>
-                            <select name="projectId" id="projectId" style="width:250px;">
+                            <select disabled="disabled" name="projectId" id="projectId" style="width:250px;">
                                     <option value="">-Select-</option>
 								    <?php foreach($projectNameList as $key=>$values){
 								     ?>
@@ -73,11 +67,17 @@ foreach($projectlist as $value){
 								    <?php }?>
                             	</select>
                     </tr>
+                    <tr>
+                            <td align="right">Client Name<strong style="color:#FE1100;padding-left:5px;"></strong></td>
+                            <td>:</td>
+                            <td><input readonly="readonly" type="text" name="txtName" id="txtName" value="<?php echo $clientdetails["clientName"];?>" style="width:250px;" maxlength="60"></td>
+                    </tr>
+
 		   
 					<tr>
                             <td align="right">Client Status<strong style="color:#FE1100;padding-left:5px;">*</strong></td>
                             <td>:</td>
-                            <td><select name="status" id="clientStatus" onchange="return chkUserType(this.value);">
+                            <td><select name="status" id="status" onchange="return chkUserType(this.value);">
                                     <option value="">-Select-</option>
 				    
 					   <option value="1" <?php if($clientdetails['status'] == 1) echo "selected";?>>Active</option>
@@ -105,10 +105,8 @@ foreach($projectlist as $value){
 	<script language="javascript">	
 		var toValidateElem = {
 			'txtName' : new Array('empty',true),
-			'selunittype' : new Array('empty',true),
-			'txtsitename' : new Array('empty',true),
-			'txtLandingPage' : new Array('empty',true),
-			'txtprojectname' : new Array('empty',true)		
+			'status' : new Array('empty',true),
+			'projectId' : new Array('empty',true)
 		}
 		var toDisplayError = {
 			'empty' : 'Must not be empty'

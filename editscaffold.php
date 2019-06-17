@@ -60,7 +60,7 @@ elseif($_GET['i'] == "2")
                     <tr>
                             <td align="right">Name<strong style="color:#FE1100;padding-left:5px;">*</strong></td>
                             <td>:</td>
-                            <td><input type="text" name="txtName" id="txtName" value="<?php echo $scaffoldDetails['scaffoldName'];?>" style="width:250px;"></td>
+                            <td><input readonly="readonly" type="text" name="txtName" id="txtName" value="<?php echo $scaffoldDetails['scaffoldName'];?>" style="width:250px;"></td>
                     </tr>
 
                     <tr>

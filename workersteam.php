@@ -113,7 +113,9 @@ $teamlist = $workers->getWorkerTeamList();
 			$.ajax({
 				type: "POST", url: 'workersteamaction.php', data: "id="+str[0]+"&hAct=3",
 				complete: function(data){
-					$('#row_'+str[1]).hide('slow');
+					//$('#row_'+str[1]).hide('slow');
+					location.reload();
+        			return;
 				}
 			});
 		}

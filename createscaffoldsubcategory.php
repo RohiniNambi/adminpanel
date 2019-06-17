@@ -12,11 +12,11 @@ if(trim($session_type) != 1){
 }
 
 if($_GET['i'] == "1")
-	$success = "Scaffold Created Successfully";
+	$success = "Scaffold Sub category Created Successfully";
 elseif($_GET['i'] == "2")
 	$error = "Error!! Please try again";
 elseif($_GET['i'] == "0")
-	$error = "Scaffold name already exists.";	
+	$error = "Scaffold Sub category Name already exists.";	
 $scaffold = new SCAFFOLD;
 $categoryList = $scaffold->getScaffoldList();
 $catTypeIdList = array();
@@ -61,11 +61,6 @@ foreach($categoryList as $det){
                             <td><strong class="bigtxt">Add Scaffold Sub Category</strong></td>				
                     </tr>
                     <tr>
-                            <td align="right">Scaffold Sub Category Name<strong style="color:#FE1100;padding-left:5px;">*</strong></td>
-                            <td>:</td>
-                            <td><input type="text" name="txtName" id="txtName" value="" style="width:250px;"></td>
-                    </tr>
-                    <tr>
                     	
                             <td align="right">Scaffold Type<strong style="color:#FE1100;padding-left:5px;">*</strong></td>
                             <td>:</td>
@@ -75,6 +70,11 @@ foreach($categoryList as $det){
                             		<option value="<?php echo $key;?>"><?php echo $val;?></option>
                             	<?php }?>                                
 						</select></td>
+                    </tr>
+                    <tr>
+                            <td align="right">Scaffold Sub Category Name<strong style="color:#FE1100;padding-left:5px;">*</strong></td>
+                            <td>:</td>
+                            <td><input type="text" name="txtName" id="txtName" value="" style="width:250px;"></td>
                     </tr>
 
                     <tr>

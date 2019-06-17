@@ -52,8 +52,8 @@ foreach($categoryList as $det){
 		<table cellpadding="1" cellspacing="1" border="0" bgcolor="#EEEEEE" width="100%" class="mediumtxt">
 			<tr bgcolor="#EEEEEE">
 				<th>&nbsp;</th>				
-				<th>Scaffold Sub Category Name</th>
 				<th>Scaffold Category</th>
+				<th>Scaffold Sub Category Name</th>
 				<th>Action</th>
 				
 			</tr>
@@ -67,8 +67,8 @@ foreach($categoryList as $det){
 			?>
 			<tr id="row_<?php echo $i?>" bgcolor="#FFFFFF">
 				<td><?php echo $i?></td>				
-				<td><?php echo $scaffoldval["scaffoldSubCatName"];?></td>
-				<td><?php echo $catTypeIdList[$scaffoldval["scaffoldTypeId"]];?></td>				
+				<td><?php echo $catTypeIdList[$scaffoldval["scaffoldTypeId"]];?></td>
+				<td><?php echo $scaffoldval["scaffoldSubCatName"];?></td>	
                              
 				<td><a href="#" onclick='_getBox("editscaffoldsubcategory.php?page=Edit&ac=<?php echo $commonObj->Encrypt($scaffoldval["scaffoldSubCateId"]);?>","50%","50%")'><img src="images/edit.gif" border="0" alt="edit" title="Edit"></a> 
 					<a href="javascript:void(0)" onclick="confimuser('<?php echo $commonObj->Encrypt($scaffoldval["scaffoldSubCateId"]);?>','<?php echo $i?>');"><img src="images/close.gif" border="0" alt="Delete" title="Delete"></td>
@@ -113,7 +113,9 @@ foreach($categoryList as $det){
 			$.ajax({
 				type: "POST", url: 'scaffoldsubcategoryaction.php', data: "id="+str[0]+"&hAct=3",
 				complete: function(data){
-					$('#row_'+str[1]).hide('slow');
+					//$('#row_'+str[1]).hide('slow');
+					location.reload();
+        			return;
 				}
 			});
 		}

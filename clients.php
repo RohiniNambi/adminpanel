@@ -52,8 +52,8 @@ $projectNameList[0]="";
 		<table cellpadding="1" cellspacing="1" border="0" bgcolor="#EEEEEE" width="100%" class="mediumtxt">
 			<tr bgcolor="#EEEEEE">
 				<th>&nbsp;</th>				
-				<th>Client Name</th>
 				<th>Projects </th>
+				<th>Client Name</th>
 				<th>Status</th>
 			
 				<th>Action</th>
@@ -68,11 +68,11 @@ $projectNameList[0]="";
 			?>
 			<tr id="row_<?php echo $i?>" bgcolor="#FFFFFF">
 				<td><?php echo $i?></td>				
-				<td><?php echo $clientval["clientName"];?></a></td>
 				<td><?php echo $projectNameList[$clientval['projects']];?></td>
+				<td><?php echo $clientval["clientName"];?></a></td>
 				<td><?php if($clientval["status"] == 1) { echo "Active";} else{ echo "In Active";}?></td>
 				
-				<td><a href="#" onclick='_getBox("editclient.php?page=Edit&ac=<?php echo $commonObj->Encrypt($clientval["clientId"]);?>","40%","40%")'><img src="images/edit.gif" border="0" alt="edit" title="Edit"></a> &nbsp; &nbsp;<a href="javascript:void(0)" onclick="confimuser('<?php echo $commonObj->Encrypt($clientval["clientId"]);?>','<?php echo $i?>');"><img src="images/close.gif" border="0" alt="Delete" title="Delete"></td>
+				<td><a href="#" onclick='_getBox("editclient.php?page=Edit&ac=<?php echo $commonObj->Encrypt($clientval["clientId"]);?>","50%","50%")'><img src="images/edit.gif" border="0" alt="edit" title="Edit"></a> &nbsp; &nbsp;<a href="javascript:void(0)" onclick="confimuser('<?php echo $commonObj->Encrypt($clientval["clientId"]);?>','<?php echo $i?>');"><img src="images/close.gif" border="0" alt="Delete" title="Delete"></td>
 				
 			</tr>
 			<?php
@@ -114,7 +114,9 @@ $projectNameList[0]="";
 			$.ajax({
 				type: "POST", url: 'clientaction.php', data: "id="+str[0]+"&hAct=3",
 				complete: function(data){
-					$('#row_'+str[1]).hide('slow');
+					//$('#row_'+str[1]).hide('slow');
+					location.reload();
+        			return;
 				}
 			});
 		}		
