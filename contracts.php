@@ -70,6 +70,13 @@ foreach($clientlist as $value){
 			</tr>
 			</thead>
 			<tbody id="myDIV">
+				<tr bgcolor="#FFFFFF" class="srch">
+					<td>&nbsp;</td>
+					<td><input type="text" placeholder="Search Project.." id="pjtsearchFilter" onkeyup="searchFilterFn()"></td>
+					<td><input type="text" placeholder="Search Client.." id="clientsearchFilter" onkeyup="searchFilterFn()"></td>
+					<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+				</tr>
+				<tr bgcolor="#FFFFFF" id="noresult" style="display: none;"><td colspan="6" align="center">No more records found</div></tr>
 			<?php
 			if(count($contractlist) > 0){
 				$i=0;
@@ -77,10 +84,10 @@ foreach($clientlist as $value){
                         $i++;
 			?>
 			
-			<tr id="row_<?php echo $i?>" bgcolor="#FFFFFF">
+			<tr id="row_<?php echo $i?>" bgcolor="#FFFFFF" class="lst">
 				<td><?php echo $i?></td>				
-				<td><?php echo $projectName[$contractval["projectId"]];?></td>
-				<td><?php echo $clientName[$contractval["clientId"]];?></td>
+				<td class="pjt"><?php echo $projectName[$contractval["projectId"]];?></td>
+				<td class="clnt"><?php echo $clientName[$contractval["clientId"]];?></td>
 				<td><?php echo $contractval["item"];?></td>
 				<td><?php echo $contractval["description"];?></td>
 				<td><a href="#" onclick='_getBox("editcontract.php?page=Edit&ac=<?php echo $commonObj->Encrypt($contractval["id"]);?>","50%","80%")'><img src="images/edit.gif" border="0" alt="edit" title="Edit"></a> &nbsp; &nbsp;<a href="javascript:void(0)" onclick="confimuser('<?php echo $commonObj->Encrypt($contractval["id"]);?>','<?php echo $i?>');"><img src="images/close.gif" border="0" alt="Delete" title="Delete"></td>
@@ -212,15 +219,29 @@ foreach($clientlist as $value){
 		document.frmUser.submit();
 		return true;
 		  }
-		  
-		  $(document).ready(function(){
-			$("#myInput").bind("keyup", function() {
-				var value = $(this).val().toLowerCase();
-				$("#myDIV tr").filter(function() {
-				$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-				});
+		 
+
+		 function searchFilterFn(){
+			var pvalue = $("#pjtsearchFilter").val().toLowerCase();
+			var cvalue = $("#clientsearchFilter").val().toLowerCase();
+			var noflag = true;
+			$("#myDIV tr.lst").filter(function() {
+				var cflag = pflag = true;
+				if(cvalue !=''){
+					cflag = $(this).children(".clnt").text().toLowerCase().indexOf(cvalue) > -1;
+				}
+				if(pvalue !=''){
+					pflag = $(this).children(".pjt").text().toLowerCase().indexOf(pvalue) > -1;
+				}
+				$(this).toggle(pflag&&cflag);
+				if(pflag&&cflag) noflag = false;
 			});
-			});
+
+			$("#noresult").toggle(noflag);
+		}
+
+		$(document).ready(function(){
+		});
 	
 	</script>
 
