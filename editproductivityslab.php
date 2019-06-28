@@ -74,22 +74,12 @@ elseif($_GET['i'] == "2")
                     	
                             <td align="right">Scaffold Type<strong style="color:#FE1100;padding-left:5px;"></strong></td>
                             <td>:</td>
-                            <td><select disabled="disabled" name="typeId" id="typeId" onchange="return loadSubcategory(this.value);">
-                            	<option value="">-Select-</option>
-                            	<?php foreach($catTypeIdList as $key=>$val){ ?>
-                            		<option <?php if($slabDetails['scaffoldType'] == $key) echo "selected";  ?> value="<?php echo $key;?>"><?php echo $val;?></option>
-                            	<?php }?>                                
-						</select></td>
+                            <td> <?php echo $catTypeIdList[$slabDetails['scaffoldType']];?></td>
                     </tr>
                     <tr>
                             <td align="right">Scaffold Sub Category<strong style="color:#FE1100;padding-left:5px;"></strong></td>
                             <td>:</td>
-                            <td><select disabled="disabled" name="subCatId" id="subCatId" onchange="return chkUserType(this.value);">
-                            	<option value="">-Select-</option>
-                            	<?php foreach($subcatTypeIdList as $key=>$val){ ?>
-                            		<option <?php if($slabDetails['scaffoldSubCategory'] == $key) echo "selected";?> value="<?php echo $key;?>"><?php echo $val;?></option>
-                            	<?php }?>                                
-						</select></td>
+                            <td> <?php echo $subcatTypeIdList[$slabDetails['scaffoldSubCategory']];?></td>
                     </tr>
                     <tr>
                             <td align="right">Units<strong style="color:#FE1100;padding-left:5px;">*</strong></td>

@@ -12,16 +12,16 @@
 <li><a href="workers.php" rel="ddsubmenu2">Manage Workers & Team</a></li>
 <?php }?>
 <?php if($session_type == 1 || $session_type == 2){?>
-<li><a href="projects.php" rel="ddsubmenu3">Manage Projects</a></li>
+<li><a href="projects.php" rel="ddsubmenu3">Manage Client & Project</a></li>
 <?php }?>
 <?php if($session_type == 1 || $session_type == 2){?>
 <li><a href="projects.php" rel="ddsubmenu4">Manage Contracts</a></li>
 <?php }?>
 <?php if($session_type == 1 || $session_type == 2){?>
-<li><a href="projects.php" rel="ddsubmenu5">Manage Clients</a></li>
+<li><a href="projects.php" rel="ddsubmenu5">Manage Scaffold</a></li>
 <?php }?>
 <?php if($session_type == 1 || $session_type == 2){?>
-<li><a href="projects.php" rel="ddsubmenu6">Manage Scaffold</a></li>
+<li><a href="projects.php" rel="ddsubmenu6">Manage Grade & Slab</a></li>
 <?php }?>
 
 </ul>
@@ -41,7 +41,9 @@
 	<li><a href="createworkersteam.php">Create Workers Team</a></li>		
 </ul>
 <ul id="ddsubmenu3" class="ddsubmenustyle">
-	<li id="firstChild"><a href="projects.php">View Project</a></li>
+	<li id="firstChild"><a href="clients.php">View Clients</a></li>		
+	<li><a href="createclient.php">Create Client</a></li>		
+	<li ><a href="projects.php">View Project</a></li>
 	<li><a href="createproject.php">Create Project</a></li>
 </ul>
 <ul id="ddsubmenu4" class="ddsubmenustyle">	
@@ -49,15 +51,13 @@
 	<li><a href="createcontract.php">Create Contract</a></li>
 </ul>		
 <ul id="ddsubmenu5" class="ddsubmenustyle">	
-	<li id="firstChild"><a href="clients.php">View Clients</a></li>		
-	<li><a href="createclient.php">Create Client</a></li>		
-</ul>
-<ul id="ddsubmenu6" class="ddsubmenustyle">	
 	<li id="firstChild"><a href="scaffold.php">View Scaffold</a></li>		
 	<li><a href="createscaffold.php">Create Scaffold</a></li>		
 	<li><a href="scaffoldsubcategory.php">View Scaffold Sub Category</a></li>		
 	<li><a href="createscaffoldsubcategory.php">Create Scaffold Sub Category</a></li>
-	<li><a href="grade.php">View Grade</a></li>
+</ul>
+<ul id="ddsubmenu6" class="ddsubmenustyle">	
+	<li id="firstChild"><a href="grade.php">View Grade</a></li>
 	<li><a href="creategrade.php">Create Grade</a></li>
 	<li><a href="productivityslab.php">View Productivity SLAB</a></li>
 	<li><a href="createproductivityslab.php">Create Productivity SLAB</a></li>		

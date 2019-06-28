@@ -60,13 +60,13 @@ elseif($_GET['i'] == "2")
                     <tr>
                             <td align="right">Range From<strong style="color:#FE1100;padding-left:5px;">*</strong></td>
                             <td>:</td>
-                            <td><input type="text" name="txtRangeFrom" id="txtRangeFrom" value="<?php echo $gradeDetails['gradeRangeFrom'];?>" style="width:250px;" onkeypress="return allowNumeric(event);"></td>
+                            <td> <?php echo $gradeDetails['gradeRangeFrom'];?></td>
                      </tr>
                      <tr>
 
                             <td align="right">Range To <strong style="color:#FE1100;padding-left:5px;">*</strong></td>
                             <td>:</td>
-                            <td><input type="text" name="txtRangeTo" id="txtRangeTo" value="<?php echo $gradeDetails['gradeRangeTo'];?>" style="width:250px;" onkeypress="return allowNumeric(event);"></td>
+                            <td> <?php echo $gradeDetails['gradeRangeTo'];?></td>
                     </tr>
 		     <tr>
                             <td align="right">Percentage</td>
@@ -76,7 +76,7 @@ elseif($_GET['i'] == "2")
                     <tr>
                             <td align="right">Grade<strong style="color:#FE1100;padding-left:5px;">*</strong></td>
                             <td>:</td>
-                            <td><input type="text" name="txtGrade" id="txtGrade" style="width:250px;" value="<?php echo $gradeDetails['grade']?>" onkeypress="return allowNumeric(event);"></td>
+                            <td><input type="text" name="txtGrade" id="txtGrade" style="width:250px;" value="<?php echo $gradeDetails['grade']?>" ></td>
                     </tr>
                                    		    
                     <tr>

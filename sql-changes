@@ -1,3 +1,6 @@
+ALTER TABLE `p_grade` CHANGE `grade` `grade` VARCHAR(10) NOT NULL DEFAULT '0';
+
+
 ALTER TABLE `p_grade` CHANGE `gradeRange` `gradeRangeTo` INT(11) NOT NULL;
 
 ALTER TABLE `p_grade` ADD `gradeRangeFrom` INT(11) NOT NULL DEFAULT '0' AFTER `id`;

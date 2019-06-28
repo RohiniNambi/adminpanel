@@ -68,17 +68,12 @@ elseif($_GET['i'] == "2")
                     	
                             <td align="right">Scaffold Type<strong style="color:#FE1100;padding-left:5px;">*</strong></td>
                             <td>:</td>
-                            <td><select name="typeId" id="typeId" onchange="return chkUserType(this.value);">
-                            	<option value="">-Select-</option>
-                            	<?php foreach($catTypeIdList as $key=>$val){ ?>
-                            		<option <?php if($scaffoldDetails["scaffoldTypeId"] == $key) echo "selected"; ?> value="<?php echo $key;?>"><?php echo $val;?></option>
-                            	<?php }?>                                
-						</select></td>
+                            <td><?php echo $catTypeIdList[$scaffoldDetails["scaffoldTypeId"]];?></td>
                     </tr>
                     <tr>
                             <td align="right">Name<strong style="color:#FE1100;padding-left:5px;"></strong></td>
                             <td>:</td>
-                            <td><input type="text" name="txtName" id="txtName" value="<?php echo $scaffoldDetails['scaffoldSubCatName'];?>" style="width:250px;" readonly="readonly"></td>
+                            <td><input type="text" name="txtName" id="txtName" value="<?php echo $scaffoldDetails['scaffoldSubCatName'];?>" style="width:250px;" ></td>
                     </tr>
 		    
                     <tr>

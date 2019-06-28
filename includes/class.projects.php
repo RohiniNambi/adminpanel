@@ -151,7 +151,7 @@ class PROJECTS
 		
 		global $DBINFO,$TABLEINFO,$SERVERS,$DBNAME;		
 		$whereClasue = "projectId = ".$this->common->Decrypt($postArr['cid']);
-		$insertArr["projectName"]=trim($postArr["txtName"]);
+		//$insertArr["projectName"]=trim($postArr["txtName"]);
 		$insertArr["projectStatus"]=trim($postArr["projectStatus"]);
 		
 		$dbm = new DB;
@@ -250,9 +250,9 @@ class PROJECTS
 	function editClient($postArr){
 		global $DBINFO,$TABLEINFO,$SERVERS,$DBNAME;		
 		$whereClasue = "clientId = ".$this->common->Decrypt($postArr['cid']);
-		$insertArr["clientName"]=trim($postArr["txtName"]);
+		//$insertArr["clientName"]=trim($postArr["txtName"]);
 		$insertArr["status"]=trim($postArr["status"]);
-		$insertArr["projects"]=trim($postArr["projectId"]);
+		//$insertArr["projects"]=trim($postArr["projectId"]);
 		$insertArr["modifiedBy"]=trim($postArr["modifiedBy"]);			
 		
 		$dbm = new DB;

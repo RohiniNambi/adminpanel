@@ -49,7 +49,7 @@ elseif($_GET['i'] == "0")
                     <tr>
                             <td align="right">Project Name<strong style="color:#FE1100;padding-left:5px;"></strong></td>
                             <td>:</td>
-                            <td><input readonly="readonly" type="text" name="txtName" id="txtName" value="<?php echo $projectdetails["projectName"];?>" style="width:250px;" maxlength="60" ></td>
+                            <td><?php echo $projectdetails["projectName"];?></td>
                     </tr>
 		   
 					<tr>

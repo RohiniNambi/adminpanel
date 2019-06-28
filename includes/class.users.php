@@ -105,7 +105,10 @@ class USERS extends PROJECTS
 		
 		if($postArr["selUsertype"] == 5){
 			$insertArr["project"]=implode(",",$postArr["selProjects"]);
+		}else{
+			$insertArr["project"] = '0';
 		}
+		
 		if($postArr["txtPassword"] != "")
 			$insertArr["password"]=md5(trim($postArr["txtPassword"]));
 		// if(trim($postArr["txtEmail"]) != '')

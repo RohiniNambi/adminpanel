@@ -52,7 +52,7 @@ $teamlist = $workers->getWorkerTeamList();
                     <tr>
                             <td align="right">Worker Name<strong style="color:#FE1100;padding-left:5px;"></strong></td>
                             <td>:</td>
-                            <td><input readonly="readonly" type="text" name="txtName" id="txtName" value="<?php echo $workersdetails["workerName"];?>" style="width:250px;" maxlength="60"></td>
+                            <td><?php echo $workersdetails["workerName"];?></td>
                     </tr>
 		   
 					<tr>

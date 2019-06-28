@@ -171,7 +171,7 @@ class WORKERS
 	function editWorkers($postArr){		
 		global $DBINFO,$TABLEINFO,$SERVERS,$DBNAME;		
 		$whereClasue = "workerId = ".$this->common->Decrypt($postArr['wid']);
-		$insertArr["workerName"]=trim($postArr["txtName"]);
+		//$insertArr["workerName"]=trim($postArr["txtName"]);
 		$insertArr["teamId"]=trim($postArr["teamId"]);
 		
 		$dbm = new DB;

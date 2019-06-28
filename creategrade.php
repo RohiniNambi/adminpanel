@@ -57,13 +57,13 @@ elseif($_GET['i'] == "0")
                     <tr>
                             <td align="right">Range From<strong style="color:#FE1100;padding-left:5px;">*</strong></td>
                             <td>:</td>
-                            <td><input type="text" name="txtRangeFrom" id="txtRangeFrom" value="" style="width:250px;" onkeypress="return allowNumeric(event);"></td>
+                            <td><input type="text" name="txtRangeFrom" id="txtRangeFrom" value="" style="width:250px;" onkeypress="return allowNumericNotdecimal(event);"></td>
                      </tr>
                      <tr>
 
                             <td align="right">Range To <strong style="color:#FE1100;padding-left:5px;">*</strong></td>
                             <td>:</td>
-                            <td><input type="text" name="txtRangeTo" id="txtRangeTo" value="" style="width:250px;" onkeypress="return allowNumeric(event);"></td>
+                            <td><input type="text" name="txtRangeTo" id="txtRangeTo" value="" style="width:250px;" onkeypress="return allowNumericNotdecimal(event);"></td>
 
                     </tr>
 		     		<tr>
@@ -74,7 +74,7 @@ elseif($_GET['i'] == "0")
 		      <tr>
                             <td align="right">Grade<strong style="color:#FE1100;padding-left:5px;">*</strong></td>
                             <td>:</td>
-                            <td><input type="text" name="txtGrade" id="txtGrade" value="" style="width:250px;" onkeypress="return allowNumeric(event);"></td>
+                            <td><input type="text" name="txtGrade" id="txtGrade" value="" style="width:250px;"></td>
                     </tr>
                                 
 		    

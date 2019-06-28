@@ -67,7 +67,7 @@ elseif($_GET['i'] == "2")
 		     <tr>
                             <td align="right">User Name</td>
                             <td>:</td>
-                            <td><input type="text" name="txtUsername" id="txtUsername" value="<?php echo $usersDetails['userName'];?>" style="width:250px;" readonly="readonly"></td>
+                            <td><?php echo $usersDetails['userName'];?></td>
                     </tr>
 		      <tr>
                             <td align="right">New Password</td>

@@ -84,7 +84,7 @@ class SCAFFOLD
 		
 		global $DBINFO,$TABLEINFO,$SERVERS,$DBNAME;
 		$whereClasue = "id = ".$this->common->Decrypt($postArr['sid']);
-		$insertArr["scaffoldName"]=trim($postArr["txtName"]);
+		//$insertArr["scaffoldName"]=trim($postArr["txtName"]);
 		$insertArr["status"]=trim($postArr["status"]);
 		
 		$dbm = new DB;
@@ -210,7 +210,7 @@ class SCAFFOLD
 		
 		$whereClasue = "scaffoldSubCateId = ".$this->common->Decrypt($postArr['sid']);
 		$insertArr["scaffoldSubCatName"]=trim($postArr["txtName"]);
-		$insertArr["scaffoldTypeId"]=trim($postArr["typeId"]);
+		//$insertArr["scaffoldTypeId"]=trim($postArr["typeId"]);
 		$insertArr["modifiedBy"]=trim($postArr["createdBy"]);
 		$dbm = new DB;
 		$dbCon = $dbm->connect('M',$DBNAME["LMS"],$DBINFO["USERNAME"],$DBINFO["PASSWORD"]);
@@ -263,7 +263,7 @@ class SCAFFOLD
 		$db = new DB;
 		$dbCon = $db->connect('S',$DBNAME["LMS"],$DBINFO["USERNAME"],$DBINFO["PASSWORD"]);
 		$selectFileds=array("id");
-		$whereClause = "gradeRangeFrom = '".trim($postArr["txtRangeFrom"])."' and gradeRangeTo ='".trim($postArr["txtRangeTo"])."'";
+		$whereClause = "gradeRangeFrom <= '".trim($postArr["txtRangeFrom"])."' and gradeRangeTo >='".trim($postArr["txtRangeTo"])."'";
 		$res=$db->select($dbCon, $DBNAME["LMS"],$TABLEINFO["GRADE"],$selectFileds,$whereClause);
 		
 		if($res[1] > 0){
@@ -276,7 +276,7 @@ class SCAFFOLD
 			$insertArr["createdBy"]= $insertArr["modifiedBy"]=trim($postArr["createdBy"]);
 
 			$dbm = new DB;
-			$dbCon2 = $dbm->connect('M',$DBNAME["LMS"],$DBINFO["USERNAME"],$DBINFO["PASSWORD"]);
+			$dbCon2 =$dbm->connect('M',$DBNAME["LMS"],$DBINFO["USERNAME"],$DBINFO["PASSWORD"]);
 			$insid = $dbm->insert($dbCon2, $DBNAME["LMS"],$TABLEINFO["GRADE"],$insertArr,1,2);
 			$dbm->dbClose();
 			if($insid == 0 || $insid == ''){ $returnval = 2; }else { $returnval = 1; }
@@ -311,8 +311,8 @@ class SCAFFOLD
 		global $DBINFO,$TABLEINFO,$SERVERS,$DBNAME;
 		
 		$whereClasue = "id = ".$this->common->Decrypt($postArr['sid']);
-		$insertArr["gradeRangeFrom"]=trim($postArr["txtRangeFrom"]);
-		$insertArr["gradeRangeTo"]=trim($postArr["txtRangeTo"]);
+		//$insertArr["gradeRangeFrom"]=trim($postArr["txtRangeFrom"]);
+		//$insertArr["gradeRangeTo"]=trim($postArr["txtRangeTo"]);
 		$insertArr["Percentage"]=trim($postArr["txtPercent"]);
 		$insertArr["grade"]=trim($postArr["txtGrade"]);
 		$insertArr["modifiedBy"]=trim($postArr["createdBy"]);

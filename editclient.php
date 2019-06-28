@@ -58,19 +58,12 @@ foreach($projectlist as $value){
                     <tr>
                             <td align="right">Project<strong style="color:#FE1100;padding-left:5px;"></strong></td>
                             <td>:</td>
-                            <td>
-                            <select disabled="disabled" name="projectId" id="projectId" style="width:250px;">
-                                    <option value="">-Select-</option>
-								    <?php foreach($projectNameList as $key=>$values){
-								     ?>
-									   <option <?php if($clientdetails["projects"] == $key) echo "selected"; ?> value="<?php echo $key;?>"><?php echo $values;?></option>							
-								    <?php }?>
-                            	</select>
+                            <td><?php echo $projectNameList[$clientdetails["projects"]];?>
                     </tr>
                     <tr>
                             <td align="right">Client Name<strong style="color:#FE1100;padding-left:5px;"></strong></td>
                             <td>:</td>
-                            <td><input readonly="readonly" type="text" name="txtName" id="txtName" value="<?php echo $clientdetails["clientName"];?>" style="width:250px;" maxlength="60"></td>
+                            <td><?php echo $clientdetails["clientName"];?></td>
                     </tr>
 
 		   
