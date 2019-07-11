@@ -82,11 +82,7 @@ elseif($_GET['i'] == "0")
 
 	<script language="javascript">	
 		var toValidateElem = {
-			'txtName' : new Array('empty',true),
-			'selunittype' : new Array('empty',true),
-			'txtsitename' : new Array('empty',true),
-			'txtLandingPage' : new Array('empty',true),
-			'txtprojectname' : new Array('empty',true)		
+			'projectStatus' : new Array('empty',true)		
 		}
 		var toDisplayError = {
 			'empty' : 'Must not be empty'

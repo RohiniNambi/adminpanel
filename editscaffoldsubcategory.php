@@ -19,8 +19,9 @@ $catTypeIdList = array();
 foreach($categoryList as $det){
 	$catTypeIdList[$det["id"]] = $det["scaffoldName"];
 }
-
-if($_GET['i'] == "1")
+if($_GET['i'] == "0")
+	$error = "Scaffold Sub Category Name already exist.";
+else if($_GET['i'] == "1")
 	$success = "Updated Successfully";
 elseif($_GET['i'] == "2")
 	// $error = "No records updated!! Please change any value and try again";
@@ -68,10 +69,12 @@ elseif($_GET['i'] == "2")
                     	
                             <td align="right">Scaffold Type<strong style="color:#FE1100;padding-left:5px;">*</strong></td>
                             <td>:</td>
-                            <td><?php echo $catTypeIdList[$scaffoldDetails["scaffoldTypeId"]];?></td>
+                            <td><?php echo $catTypeIdList[$scaffoldDetails["scaffoldTypeId"]];?>
+                            	<input type="hidden" name="typeId" id="typeId" value="<?php echo $scaffoldDetails["scaffoldTypeId"];?>" style="width:250px;" >
+                            </td>
                     </tr>
                     <tr>
-                            <td align="right">Name<strong style="color:#FE1100;padding-left:5px;"></strong></td>
+                            <td align="right">Name<strong style="color:#FE1100;padding-left:5px;">*</strong></td>
                             <td>:</td>
                             <td><input type="text" name="txtName" id="txtName" value="<?php echo $scaffoldDetails['scaffoldSubCatName'];?>" style="width:250px;" ></td>
                     </tr>
@@ -94,8 +97,7 @@ elseif($_GET['i'] == "2")
 
 	<script language="javascript">	
 		var toValidateElem = {
-			'txtName' : new Array('empty',true),
-			'typeId' : new Array('empty',true)
+			'txtName' : new Array('empty',true)
 		}
 		var toDisplayError = {
 			'empty' : 'Must not be empty'

@@ -69,7 +69,7 @@ elseif($_GET['i'] == "2")
                             <td> <?php echo $gradeDetails['gradeRangeTo'];?></td>
                     </tr>
 		     <tr>
-                            <td align="right">Percentage</td>
+                            <td align="right">Percentage <strong style="color:#FE1100;padding-left:5px;">*</strong></td>
                             <td>:</td>
                             <td><input type="text" name="txtPercent" id="txtPercent" value="<?php echo $gradeDetails['Percentage'];?>" style="width:250px;" onkeypress="return allowPercent(event);"></td>
                     </tr>
@@ -97,8 +97,6 @@ elseif($_GET['i'] == "2")
 
 	<script language="javascript">	
 		var toValidateElem = {
-			'txtRangeFrom' : new Array('empty',true),
-			'txtRangeTo' : new Array('empty',true),
 			'txtPercent' : new Array('empty',true),
 			'txtGrade' : new Array('empty',true)
 		}

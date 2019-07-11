@@ -207,17 +207,25 @@ class SCAFFOLD
 	function editScaffoldSubCategory($postArr){
 		
 		global $DBINFO,$TABLEINFO,$SERVERS,$DBNAME;
-		
-		$whereClasue = "scaffoldSubCateId = ".$this->common->Decrypt($postArr['sid']);
-		$insertArr["scaffoldSubCatName"]=trim($postArr["txtName"]);
-		//$insertArr["scaffoldTypeId"]=trim($postArr["typeId"]);
-		$insertArr["modifiedBy"]=trim($postArr["createdBy"]);
 		$dbm = new DB;
 		$dbCon = $dbm->connect('M',$DBNAME["LMS"],$DBINFO["USERNAME"],$DBINFO["PASSWORD"]);
-		$insid = $dbm->update($dbCon, $DBNAME["LMS"],$TABLEINFO["SCAFFOLDSUBCATEGORY"],$insertArr,$whereClasue);
-		$dbm->dbClose();
-		if($insid == 0 || $insid == ''){ $returnval = 2; }else { $returnval = 1; }
-		
+
+		$selectFileds=array("scaffoldSubCateId");
+		$whereClause = "scaffoldSubCatName = '".trim($postArr["txtName"])."' and scaffoldTypeId = '".trim($postArr["typeId"])."' and scaffoldSubCateId != '".$this->common->Decrypt($postArr['sid'])."'";
+		$res=$dbm->select($dbCon, $DBNAME["LMS"],$TABLEINFO["SCAFFOLDSUBCATEGORY"],$selectFileds,$whereClause);
+		if($res[1] > 0){
+			$returnval = 0;
+		}else{
+			$whereClasue = "scaffoldSubCateId = ".$this->common->Decrypt($postArr['sid']);
+			$insertArr["scaffoldSubCatName"]=trim($postArr["txtName"]);
+			//$insertArr["scaffoldTypeId"]=trim($postArr["typeId"]);
+			$insertArr["modifiedBy"]=trim($postArr["createdBy"]);
+			
+			$insid = $dbm->update($dbCon, $DBNAME["LMS"],$TABLEINFO["SCAFFOLDSUBCATEGORY"],$insertArr,$whereClasue);
+			$dbm->dbClose();
+			if($insid == 0 || $insid == ''){ $returnval = 2; }else { $returnval = 1; }
+
+		}		
 		return $returnval;
 	}
 	

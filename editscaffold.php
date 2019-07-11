@@ -93,7 +93,7 @@ elseif($_GET['i'] == "2")
 
 	<script language="javascript">	
 		var toValidateElem = {
-			'txtName' : new Array('empty',true)
+			'status' : new Array('empty',true)
 		}
 		var toDisplayError = {
 			'empty' : 'Must not be empty'

@@ -100,7 +100,7 @@ class USERS extends PROJECTS
 		
 		$whereClasue = "userId = ".$this->common->Decrypt($postArr['uid']);
 		
-		$insertArr["userName"]=trim($postArr["txtUsername"]);
+		//$insertArr["userName"]=trim($postArr["txtUsername"]);
 		$insertArr["Name"]=trim($postArr["txtName"]);
 		
 		if($postArr["selUsertype"] == 5){
