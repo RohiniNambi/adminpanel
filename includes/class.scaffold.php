@@ -431,13 +431,12 @@ class SCAFFOLD
 		global $DBINFO,$TABLEINFO,$SERVERS,$DBNAME;
 		$whereClasue = "id = ".$this->common->Decrypt($postArr['sid']);
 
-		$insertArr["scaffoldType"]=trim($postArr["typeId"]);
-		$insertArr["scaffoldSubCategory"]=trim($postArr["subCatId"]);
+		//$insertArr["scaffoldType"]=trim($postArr["typeId"]);
+		//$insertArr["scaffoldSubCategory"]=trim($postArr["subCatId"]);
 		$insertArr["unit"]=trim($postArr["unitId"]);
 		$insertArr["typeWorkErection"]=trim($postArr["erection"]);
 		$insertArr["typeWorkDismantle"]=trim($postArr["dismantle"]);
 		$insertArr["modifiedBy"] = trim($postArr["createdBy"]);
-
 		$dbm = new DB;
 		$dbCon = $dbm->connect('M',$DBNAME["LMS"],$DBINFO["USERNAME"],$DBINFO["PASSWORD"]);
 		$insid = $dbm->update($dbCon, $DBNAME["LMS"],$TABLEINFO["PRODUCTIVITYSLAB"],$insertArr,$whereClasue);
