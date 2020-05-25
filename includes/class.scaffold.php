@@ -352,7 +352,7 @@ class SCAFFOLD
 		$db = new DB;
 		$dbcon = $db->connect('S',$DBNAME["LMS"],$DBINFO["USERNAME"],$DBINFO["PASSWORD"]);
 		
-		$selectFileds=array("id","scaffoldType","scaffoldSubCategory", "unit", "typeWorkErection", "typeWorkDismantle");
+		$selectFileds=array("id","scaffoldType","scaffoldSubCategory", "project","client","unit", "typeWorkErection", "typeWorkDismantle");
 
 		$whereClause = "id != 0";
 		$res=$db->select($dbcon,$DBNAME["LMS"],$TABLEINFO["PRODUCTIVITYSLAB"],$selectFileds,$whereClause);
@@ -375,7 +375,7 @@ class SCAFFOLD
 		$db = new DB;
 		$dbcon = $db->connect('S',$DBNAME["LMS"],$DBINFO["USERNAME"],$DBINFO["PASSWORD"]);
 		
-		$selectFileds=array("id","scaffoldType","scaffoldSubCategory", "unit", "typeWorkErection", "typeWorkDismantle");
+		$selectFileds=array("id","scaffoldType","scaffoldSubCategory", "project","client","unit", "typeWorkErection", "typeWorkDismantle");
 
 		$whereClause = "id = $sid";
 		$res=$db->select($dbcon, $DBNAME["LMS"],$TABLEINFO["PRODUCTIVITYSLAB"],$selectFileds,$whereClause);
@@ -411,6 +411,8 @@ class SCAFFOLD
 			$insertArr["scaffoldType"]=trim($postArr["typeId"]);
 			$insertArr["scaffoldSubCategory"]=trim($postArr["subCatId"]);
 			$insertArr["unit"]=trim($postArr["unitId"]);
+			$insertArr["project"]=trim($postArr["projectId"]);
+			$insertArr["client"]=trim($postArr["clientId"]);
 			$insertArr["typeWorkErection"]=trim($postArr["erection"]);
 			$insertArr["typeWorkDismantle"]=trim($postArr["dismantle"]);
 			$insertArr["createdBy"]= $insertArr["modifiedBy"] = trim($postArr["createdBy"]);
@@ -434,6 +436,8 @@ class SCAFFOLD
 		//$insertArr["scaffoldType"]=trim($postArr["typeId"]);
 		//$insertArr["scaffoldSubCategory"]=trim($postArr["subCatId"]);
 		$insertArr["unit"]=trim($postArr["unitId"]);
+		$insertArr["client"]=trim($postArr["clientId"]);
+		$insertArr["project"]=trim($postArr["projectId"]);
 		$insertArr["typeWorkErection"]=trim($postArr["erection"]);
 		$insertArr["typeWorkDismantle"]=trim($postArr["dismantle"]);
 		$insertArr["modifiedBy"] = trim($postArr["createdBy"]);

@@ -14,11 +14,6 @@ $projects = new PROJECTS;
 $clientlist = $projects->getClientList();
 
 $projectlist = $projects->getProjectList();
-$projectNameList = array();
-foreach($projectlist as $value){
-    $projectNameList[$value["projectId"]]=$value["projectName"];
-}
-$projectNameList[0]="";
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
@@ -50,14 +45,21 @@ $projectNameList[0]="";
 		<a href="createclient.php"><input type="button" name="createuser" value="Create Client" class="button"></a>
 		<br><br>
 		<table cellpadding="1" cellspacing="1" border="0" bgcolor="#EEEEEE" width="100%" class="mediumtxt">
+			<thead>
 			<tr bgcolor="#EEEEEE">
 				<th>&nbsp;</th>				
-				<th>Projects </th>
 				<th>Client Name</th>
 				<th>Status</th>
 			
 				<th>Action</th>
 				
+			</tr>
+		</thead>
+		<tbody id="myDIV">
+			<tr bgcolor="#FFFFFF" class="srch">
+				<td>&nbsp;</td>
+				<td><input type="text" placeholder="Search Client.." id="clientsearchFilter" onkeyup="searchFilterFn()"></td>
+				<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
 			</tr>
 			<?php
 
@@ -66,13 +68,12 @@ $projectNameList[0]="";
 			foreach($clientlist as $clientval){
                         $i++;
 			?>
-			<tr id="row_<?php echo $i?>" bgcolor="#FFFFFF">
+			<tr id="row_<?php echo $i?>" bgcolor="#FFFFFF" class="lst">
 				<td><?php echo $i?></td>				
-				<td><?php echo $projectNameList[$clientval['projects']];?></td>
-				<td><?php echo $clientval["clientName"];?></a></td>
+				<td class="clnt"><?php echo $clientval["clientName"];?></a></td>
 				<td><?php if($clientval["status"] == 1) { echo "Active";} else{ echo "In Active";}?></td>
 				
-				<td><a href="#" onclick='_getBox("editclient.php?page=Edit&ac=<?php echo $commonObj->Encrypt($clientval["clientId"]);?>","50%","50%")'><img src="images/edit.gif" border="0" alt="edit" title="Edit"></a> &nbsp; &nbsp;<a href="javascript:void(0)" onclick="confimuser('<?php echo $commonObj->Encrypt($clientval["clientId"]);?>','<?php echo $i?>');"><img src="images/close.gif" border="0" alt="Delete" title="Delete"></td>
+				<td><a href="#" onclick='_getBox("editclient.php?page=Edit&ac=<?php echo $commonObj->Encrypt($clientval["clientId"]);?>","50%","90%")'><img src="images/edit.gif" border="0" alt="edit" title="Edit"></a> &nbsp; &nbsp;<a href="javascript:void(0)" onclick="confimuser('<?php echo $commonObj->Encrypt($clientval["clientId"]);?>','<?php echo $i?>');"><img src="images/close.gif" border="0" alt="Delete" title="Delete"></td>
 				
 			</tr>
 			<?php
@@ -85,9 +86,10 @@ $projectNameList[0]="";
 				<td colspan="8" align="center"><span class="mediumtxt boldtxt errortxt">No records found.</span></td>
 			</tr>
 		<?php }?>
+		</tbody>
 		</table>
 		
-		</from>
+		</form>
 	</div>
 		<form name="delete">
 			<input type="hidden" name="hAct" value="2">
@@ -109,6 +111,26 @@ $projectNameList[0]="";
 		function confimuser(id,rowid){
 			confimationMsg('Are you sure you want to delete the vehicle?','DeleteUser',id+"~~~~~"+rowid);
 		}
+
+		function searchFilterFn(){
+			var pvalue = $("#pjtsearchFilter").val().toLowerCase();
+			var cvalue = $("#clientsearchFilter").val().toLowerCase();
+			var noflag = true;
+			$("#myDIV tr.lst").filter(function() {
+				var cflag = pflag = true;
+				if(cvalue !=''){
+					cflag = $(this).children(".clnt").text().toLowerCase().indexOf(cvalue) > -1;
+				}
+				if(pvalue !=''){
+					pflag = $(this).children(".pjt").text().toLowerCase().indexOf(pvalue) > -1;
+				}
+				$(this).toggle(pflag&&cflag);
+				if(pflag&&cflag) noflag = false;
+			});
+
+			$("#noresult").toggle(noflag);
+		}
+
 		function DeleteUser(id){						
 			str = id.split('~~~~~');
 			$.ajax({

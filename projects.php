@@ -13,6 +13,11 @@ if(trim($session_type) == 3){
 
 $projects = new PROJECTS;
 $projectlist = $projects->getProjectList();
+$clientlist = $projects->getClientList();
+$newCliList = array();
+foreach($clientlist as $det){
+	$newCliList[$det["clientId"]] = $det["clientName"];
+}
 
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -45,14 +50,23 @@ $projectlist = $projects->getProjectList();
 		<a href="createproject.php"><input type="button" name="createuser" value="Create Project" class="button"></a>
 		<br><br>
 		<table cellpadding="1" cellspacing="1" border="0" bgcolor="#EEEEEE" width="100%" class="mediumtxt">
-			<tr bgcolor="#EEEEEE">
+		<thead>
+				<tr bgcolor="#EEEEEE">
 				<th>&nbsp;</th>				
 				<th>Project Name</th>
-				
+				<th>Clients</th>
 				<th>Status</th>
 			
 				<th>Action</th>
 				
+			</tr>
+		</thead>
+		<tbody id="myDIV">
+			<tr bgcolor="#FFFFFF" class="srch">
+				<td>&nbsp;</td>
+				<td><input type="text" placeholder="Search Project.." id="pjtsearchFilter" onkeyup="searchFilterFn()"></td>
+				<td><input type="text" placeholder="Search Client.." id="clientsearchFilter" onkeyup="searchFilterFn()"></td>
+				<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
 			</tr>
 			<?php
 
@@ -60,14 +74,22 @@ $projectlist = $projects->getProjectList();
 				$i=0;
 			foreach($projectlist as $projectval){
                         $i++;
+                        $clnt = explode(",", $projectval["clients"]);
 			?>
-			<tr id="row_<?php echo $i?>" bgcolor="#FFFFFF">
+			<tr id="row_<?php echo $i?>" bgcolor="#FFFFFF" class="lst">
 				<td><?php echo $i?></td>				
-				<td><?php echo $projectval["projectName"];?></a></td>
-				
+				<td class="pjt"><?php echo $projectval["projectName"];?></a></td>
+				<td class="clnt">
+					<?php 
+						$tar = array(); 
+				foreach($clnt as $k => $cid){
+					$tar[$k] = $newCliList[$cid];
+				}
+				echo implode(",", $tar);?></a></td>
+
 				<td><?php if($projectval["projectStatus"] == 1) { echo "Active";} else{ echo "Closed";}?></td>
 				
-				<td><a href="#" onclick='_getBox("editproject.php?page=Edit&ac=<?php echo $commonObj->Encrypt($projectval["projectId"]);?>","40%","40%")'><img src="images/edit.gif" border="0" alt="edit" title="Edit"></a> &nbsp; &nbsp;<a href="javascript:void(0)" onclick="confimuser('<?php echo $commonObj->Encrypt($projectval["projectId"]);?>','<?php echo $i?>');"><img src="images/close.gif" border="0" alt="Delete" title="Delete"></td>
+				<td><a href="#" onclick='_getBox("editproject.php?page=Edit&ac=<?php echo $commonObj->Encrypt($projectval["projectId"]);?>","40%","60%")'><img src="images/edit.gif" border="0" alt="edit" title="Edit"></a> &nbsp; &nbsp;<a href="javascript:void(0)" onclick="confimuser('<?php echo $commonObj->Encrypt($projectval["projectId"]);?>','<?php echo $i?>');"><img src="images/close.gif" border="0" alt="Delete" title="Delete"></td>
 				
 			</tr>
 			<?php
@@ -80,9 +102,10 @@ $projectlist = $projects->getProjectList();
 				<td colspan="8" align="center"><span class="mediumtxt boldtxt errortxt">No records found.</span></td>
 			</tr>
 		<?php }?>
+		</tbody>
 		</table>
 		
-		</from>
+		</form>
 	</div>
 		<form name="delete">
 			<input type="hidden" name="hAct" value="2">
@@ -104,6 +127,27 @@ $projectlist = $projects->getProjectList();
 		function confimuser(id,rowid){
 			confimationMsg('Are you sure you want to delete the project?','DeleteUser',id+"~~~~~"+rowid);
 		}
+
+		function searchFilterFn(){
+			var pvalue = $("#pjtsearchFilter").val().toLowerCase();
+			var cvalue = $("#clientsearchFilter").val().toLowerCase();
+			var noflag = true;
+			$("#myDIV tr.lst").filter(function() {
+				var cflag = pflag = true;
+				if(cvalue !=''){
+					cflag = $(this).children(".clnt").text().toLowerCase().indexOf(cvalue) > -1;
+				}
+				if(pvalue !=''){
+					pflag = $(this).children(".pjt").text().toLowerCase().indexOf(pvalue) > -1;
+				}
+				$(this).toggle(pflag&&cflag);
+				if(pflag&&cflag) noflag = false;
+			});
+
+			$("#noresult").toggle(noflag);
+		}
+
+
 		function DeleteUser(id){						
 			str = id.split('~~~~~');
 			$.ajax({

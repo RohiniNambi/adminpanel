@@ -6,6 +6,8 @@ if(trim($session_id) == ""){
 	$commonObj->RedirectTo('logout.php');
 }
 
+$clients = new PROJECTS;
+$clientList = $clients->getClientList();
 
 if($_GET['i'] == "1")
 	$success = "Project Created Successfully";
@@ -55,7 +57,23 @@ elseif($_GET['i'] == "0")
                             <td>:</td>
                             <td><input type="text" name="txtName" id="txtName" value="" style="width:250px;" maxlength="60"></td>
                     </tr>
-		    
+                    <td colspan="2"></td>
+		    <tr id="clientdiv">
+                            <td align="right">Clients<strong style="color:#FE1100;padding-left:5px;">*</strong></td>
+                            <td>:</td>
+                            <td>
+                                <select style="width:250px" name="selClients[]" id="selClients" multiple="multiple">
+                         		<option value="0">-Select-</option>           
+				    <?php
+				    foreach($clientList as $key=>$values){
+				    ?>
+					   <option value="<?php echo $values["clientId"]?>"><?php echo $values["clientName"]?></option>
+				
+				    <?php }?>
+                                </select>
+                            </td>
+                    </tr>
+
 			    <td colspan="2"></td>
                             <td><input type="submit" name="sbnAddUser" id="sbnAddUser" value="Submit" class="button"></td>				
                     </tr>
@@ -80,10 +98,12 @@ elseif($_GET['i'] == "0")
 			'selunittype' : new Array('empty',true),
 			'txtsitename' : new Array('empty',true),
 			'txtLandingPage' : new Array('empty',true),
-			'txtprojectname' : new Array('empty',true)
+			'txtprojectname' : new Array('empty',true),
+			'selClients': new Array('select',true)
 		}
 		var toDisplayError = {
-			'empty' : 'Must not be empty'
+			'empty' : 'Must not be empty',
+			'select' : 'Must not be empty'
 		}
 		var _formId = "frmuser";
 		var _submitId = "sbnAddUser";

@@ -1,6 +1,7 @@
-
 <?php
 include_once "./includes/class.scaffold.php";
+include_once "./includes/class.projects.php";
+
 
 if(trim($session_id) == ""){
 	$commonObj->RedirectTo('logout.php');
@@ -32,6 +33,17 @@ elseif($_GET['i'] == "2")
 	// $error = "No records updated!! Please change any value and try again";
 	$error = "Updated Successfully";
 
+$projects = new PROJECTS;
+$clientList = $projects->getClientList();
+$projectList = $projects->getProjectList();
+$projectNameList = array();
+$clientNameList = array();
+foreach($projectList as $value){
+    $projectNameList[$value["projectId"]]=$value["projectName"];
+}
+foreach ($clientList as $value) {
+	$clientNameList[$value["clientId"]]=$value["clientName"];
+}
 
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -82,6 +94,27 @@ elseif($_GET['i'] == "2")
                             <td> <?php echo $subcatTypeIdList[$slabDetails['scaffoldSubCategory']];?></td>
                     </tr>
                     <tr>
+
+                            <td align="right">Project<strong style="color:#FE1100;padding-left:5px;">*</strong></td>
+                            <td>:</td>
+                            <td><select name="projectId" id="projectId" onchange="return chkUserType(this.value);">
+                            	<option value="">-Select-</option>
+                            	<?php foreach($projectNameList as $key=>$val){ ?>
+                            		<option <?php if($slabDetails['project']==$key) echo "selected";?> value="<?php echo $key;?>"><?php echo $val;?></option>
+                            	<?php }?>                                
+						</select></td>
+                    </tr> 
+                    <tr>
+                            <td align="right">Client<strong style="color:#FE1100;padding-left:5px;">*</strong></td>
+                            <td>:</td>
+                            <td><select name="clientId" id="clientId" onchange="return chkUserType(this.value);">
+                            	<option value="">-Select-</option>
+                            	<?php foreach($clientNameList as $key=>$val){ ?>
+                            		<option <?php if($slabDetails['client']==$key) echo "selected";?> value="<?php echo $key;?>"><?php echo $val;?></option>
+                            	<?php }?>                                
+						</select></td>
+                    </tr> 
+                    <tr>
                             <td align="right">Units<strong style="color:#FE1100;padding-left:5px;">*</strong></td>
                             <td>:</td>
                             <td><select name="unitId" id="unitId" onchange="return chkUserType(this.value);">
@@ -126,6 +159,8 @@ elseif($_GET['i'] == "2")
 		var toValidateElem = {
 			'typeId' : new Array('empty',true),
 			'subCatId' : new Array('empty',true),
+			'projectId' : new Array('empty',true),
+			'clientId' : new Array('empty',true),
 			'unitId' : new Array('empty',true),
 			'erection' : new Array('empty',true),
 			'dismantle' : new Array('empty',true)

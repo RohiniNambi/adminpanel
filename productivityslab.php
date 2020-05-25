@@ -1,5 +1,6 @@
 <?php
 include_once "./includes/class.scaffold.php";
+include_once "./includes/class.projects.php";
 
 if(trim($session_id) == ""){
 	 $commonObj->RedirectTo('logout.php');
@@ -13,6 +14,7 @@ if(trim($session_type) != 1){
 $scaffold = new SCAFFOLD;
 $slablist = $scaffold->getPSlabList();
 
+
 $categoryList = $scaffold->getScaffoldList();
 $catTypeIdList = array();
 foreach($categoryList as $det){
@@ -24,6 +26,18 @@ $subcatTypeIdList = array();
 foreach($subcategoryList as $sdet){
 	$subcatTypeIdList[$sdet["scaffoldSubCateId"]] = $sdet["scaffoldSubCatName"];
 }
+
+$pjt = new PROJECTS;
+$projectList = $pjt->getActiveProjectList();
+$clientList = $pjt->getClientList();
+
+foreach($projectList as $pdet){
+	$pIdList[$pdet["projectId"]] = $pdet["projectName"];
+}
+foreach($clientList as $cdet){
+	$cIdList[$cdet["clientId"]] = $cdet["clientName"];
+}
+
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
@@ -59,6 +73,8 @@ foreach($subcategoryList as $sdet){
 				<th>&nbsp;</th>				
 				<th>Scaffold Type</th>
 				<th>Scaffold Sub Category</th>
+				<th>Project</th>
+				<th>Client</th>
 				<th>Unit</th>
 				<th>Erection</th>
 				<th>Dismantle</th>
@@ -76,11 +92,13 @@ foreach($subcategoryList as $sdet){
 				<td><?php echo $i?></td>				
 				<td><?php echo $catTypeIdList[$sval["scaffoldType"]];?></td>			
 				<td><?php echo $subcatTypeIdList[$sval["scaffoldSubCategory"]];?></td>
+				<td><?php echo $pIdList[$sval['project']]?></td>
+				<td><?php echo $cIdList[$sval['client']]?></td>
 				<td><?php echo $_UNITS[$sval['unit']]?></td>
 				<td><?php echo $sval['typeWorkErection']?></td>
 				<td><?php echo $sval['typeWorkDismantle']?></td>
                              
-				<td><a href="#" onclick='_getBox("editproductivityslab.php?page=Edit&ac=<?php echo $commonObj->Encrypt($sval["id"]);?>","50%","65%")'><img src="images/edit.gif" border="0" alt="edit" title="Edit"></a> 
+				<td><a href="#" onclick='_getBox("editproductivityslab.php?page=Edit&ac=<?php echo $commonObj->Encrypt($sval["id"]);?>","50%","75%")'><img src="images/edit.gif" border="0" alt="edit" title="Edit"></a> 
 					<a href="javascript:void(0)" onclick="confimuser('<?php echo $commonObj->Encrypt($sval["id"]);?>','<?php echo $i?>');"><img src="images/close.gif" border="0" alt="Delete" title="Delete"></td>
 				
 			</tr>

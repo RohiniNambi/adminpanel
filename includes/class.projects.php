@@ -58,7 +58,7 @@ class PROJECTS
 		$db = new DB;
 		$dbCon = $db->connect('S',$DBNAME["LMS"],$DBINFO["USERNAME"],$DBINFO["PASSWORD"]);
 		
-		$selectFileds=array("projectName","projectStatus","projectId");
+		$selectFileds=array("projectName","clients","projectStatus","projectId");
 		$whereClause = "projectStatus != 9";
 		$res=$db->select($dbCon, $DBNAME["LMS"],$TABLEINFO["PROJECTS"],$selectFileds,$whereClause);
 		
@@ -102,7 +102,7 @@ class PROJECTS
 		$db = new DB;
 		$dbCon = $db->connect('S',$DBNAME["LMS"],$DBINFO["USERNAME"],$DBINFO["PASSWORD"]);
 		
-		$selectFileds=array("projectName","projectStatus","projectId");
+		$selectFileds=array("projectName","clients","projectStatus","projectId");
 		$whereClause = "projectId = $pid";
 		$res=$db->select($dbCon,$DBNAME["LMS"],$TABLEINFO["PROJECTS"],$selectFileds,$whereClause);
 		
@@ -127,11 +127,11 @@ class PROJECTS
 		$selectFileds=array("projectName");
 		$whereClause = "projectName = '".trim($postArr["txtName"])."' and projectStatus!=9";
 		$res=$db->select($dbcon,$DBNAME["LMS"],$TABLEINFO["PROJECTS"],$selectFileds,$whereClause);
-		
 		if($res[1] > 0){
 			$returnval = 0;
 		}else{
 			$insertArr["projectName"]=trim($postArr["txtName"]);
+			$insertArr["clients"]=implode(",",$postArr["selClients"]);
 			$insertArr["createdBy"]=trim($postArr["createdBy"]);
 			$insertArr["createdOn"]= date("Y-m-d H:i:s");			
 			
@@ -152,8 +152,9 @@ class PROJECTS
 		global $DBINFO,$TABLEINFO,$SERVERS,$DBNAME;		
 		$whereClasue = "projectId = ".$this->common->Decrypt($postArr['cid']);
 		//$insertArr["projectName"]=trim($postArr["txtName"]);
+		$insertArr["clients"]=implode(",",$postArr["selClients"]);
 		$insertArr["projectStatus"]=trim($postArr["projectStatus"]);
-		
+
 		$dbm = new DB;
 		$dbcon = $dbm->connect('M',$DBNAME["LMS"],$DBINFO["USERNAME"],$DBINFO["PASSWORD"]);
 		$insid = $dbm->update($dbcon,$DBNAME["LMS"],$TABLEINFO["PROJECTS"],$insertArr,$whereClasue);
@@ -183,7 +184,6 @@ class PROJECTS
 		global $DBINFO,$TABLEINFO,$SERVERS,$DBNAME;
 		$db = new DB;
 		$dbcon=$db->connect('S',$DBNAME["LMS"],$DBINFO["USERNAME"],$DBINFO["PASSWORD"]);
-		
 		$selectFileds=array("clientName");
 		$whereClause = "clientName = '".trim($postArr["txtName"])."' and status!=9";
 		$res=$db->select($dbcon,$DBNAME["LMS"],$TABLEINFO["CLIENTS"],$selectFileds,$whereClause);
@@ -192,8 +192,19 @@ class PROJECTS
 			$returnval = 0;
 		}else{
 			$insertArr["clientName"]=trim($postArr["txtName"]);
-			$insertArr["projects"]=trim($postArr["projectId"]);
+			$insertArr["projects"]=implode(",",$postArr["projectId"]);
 			$insertArr["createdBy"]=trim($postArr["createdBy"]);
+			$insertArr["type"]=trim($postArr["txtType"]);
+			$insertArr["address"]=trim($postArr["txtAddr"]);
+			$insertArr["tel1"]=trim($postArr["txtTel"]);
+			$insertArr["fax"]=trim($postArr["txtFax"]);
+			$insertArr["attn1"]=trim($postArr["txtAttn"]);
+			$insertArr["emailaddress"]=trim($postArr["txtEmail1"]);
+			$insertArr["hpdid"]=trim($postArr["txtDid"]);
+			$insertArr["attn2"]=trim($postArr["txtAttn2"]);
+			$insertArr["emailaddress1"]=trim($postArr["txtEmail2"]);
+			$insertArr["hpdid2"]=trim($postArr["txtDid2"]);
+			
 			$dbm = new DB;
 			$dbcon2 = $dbm->connect('M',$DBNAME["LMS"],$DBINFO["USERNAME"],$DBINFO["PASSWORD"]);
 			$insid = $dbm->insert($dbcon2,$DBNAME["LMS"],$TABLEINFO["CLIENTS"],$insertArr,1,2);
@@ -208,7 +219,7 @@ class PROJECTS
 		$db = new DB;
 		$dbCon = $db->connect('S',$DBNAME["LMS"],$DBINFO["USERNAME"],$DBINFO["PASSWORD"]);
 		
-		$selectFileds=array("clientName","clientId","status","projects");
+		$selectFileds=array("clientName","clientId","status","projects","type", "address", "tel1", "fax", "attn1", "emailaddress", "hpdid", "attn2", "emailaddress1", "hpdid2");
 		$whereClause = "status != 9";
 		$res=$db->select($dbCon, $DBNAME["LMS"],$TABLEINFO["CLIENTS"],$selectFileds,$whereClause);
 		
@@ -229,7 +240,7 @@ class PROJECTS
 		$db = new DB;
 		$dbCon = $db->connect('S',$DBNAME["LMS"],$DBINFO["USERNAME"],$DBINFO["PASSWORD"]);
 		
-		$selectFileds=array("clientName","clientId","status","projects");
+		$selectFileds=array("clientName","clientId","status","projects","type", "address", "tel1", "fax", "attn1", "emailaddress", "hpdid", "attn2", "emailaddress1", "hpdid2");
 		$whereClause = "clientId = $cid";
 		$res=$db->select($dbCon,$DBNAME["LMS"],$TABLEINFO["CLIENTS"],$selectFileds,$whereClause);
 		
@@ -251,8 +262,18 @@ class PROJECTS
 		global $DBINFO,$TABLEINFO,$SERVERS,$DBNAME;		
 		$whereClasue = "clientId = ".$this->common->Decrypt($postArr['cid']);
 		//$insertArr["clientName"]=trim($postArr["txtName"]);
+		$insertArr["projects"]=implode(",",$postArr["projectId"]);
+		$insertArr["type"]=trim($postArr["txtType"]);
+		$insertArr["address"]=trim($postArr["txtAddr"]);
+		$insertArr["tel1"]=trim($postArr["txtTel"]);
+		$insertArr["fax"]=trim($postArr["txtFax"]);
+		$insertArr["attn1"]=trim($postArr["txtAttn"]);
+		$insertArr["emailaddress"]=trim($postArr["txtEmail1"]);
+		$insertArr["hpdid"]=trim($postArr["txtDid"]);
+		$insertArr["attn2"]=trim($postArr["txtAttn2"]);
+		$insertArr["emailaddress1"]=trim($postArr["txtEmail2"]);
+		$insertArr["hpdid2"]=trim($postArr["txtDid2"]);
 		$insertArr["status"]=trim($postArr["status"]);
-		//$insertArr["projects"]=trim($postArr["projectId"]);
 		$insertArr["modifiedBy"]=trim($postArr["modifiedBy"]);			
 		
 		$dbm = new DB;

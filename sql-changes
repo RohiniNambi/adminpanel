@@ -1,3 +1,12 @@
+ALTER TABLE `p_projects` ADD `clients` VARCHAR(11) NOT NULL;
+
+ALTER TABLE `p_productivityslab` ADD `project` INT(11) NOT NULL, ADD `client` INT(11) NOT NULL;
+
+ALTER TABLE `p_clients` ADD `type` VARCHAR(11) NOT NULL, ADD `address` VARCHAR(100) NOT NULL, ADD `tel1` VARCHAR(15) NOT NULL , ADD `fax` VARCHAR(15) NOT NULL , ADD `attn1` VARCHAR(100) NOT NULL, ADD `emailaddress` VARCHAR(50) NOT NULL, ADD `hpdid` VARCHAR(100) NOT NULL, ADD `attn2` VARCHAR(100) NOT NULL , ADD `emailaddress1` VARCHAR(50) NOT NULL, ADD `hpdid2` VARCHAR(100) NOT NULL;
+
+___________________________________________________
+
+
 ALTER TABLE `p_grade` CHANGE `grade` `grade` VARCHAR(10) NOT NULL DEFAULT '0';
 
 

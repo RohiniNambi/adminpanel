@@ -9,6 +9,9 @@ if(trim($session_id) == ""){
 $projects = new PROJECTS;
 $pid = $commonObj->Decrypt($_GET['ac']);
 $projectdetails = $projects->getProjectDetails($pid);
+$selClients = explode(",", $projectdetails["clients"]);
+$clientList = $projects->getClientList();
+
 if($_GET['i'] == "1")
 	$success = "Project edited successfully";
 elseif($_GET['i'] == "2")
@@ -51,7 +54,25 @@ elseif($_GET['i'] == "0")
                             <td>:</td>
                             <td><?php echo $projectdetails["projectName"];?></td>
                     </tr>
-		   
+
+                    <tr id="projectdiv" >
+                            <td align="right">Clients<strong style="color:#FE1100;padding-left:5px;">*</strong></td>
+                            <td>:</td>
+                            <td>
+                                <select name="selClients[]" id="selClients" multiple="multiple" style="width:250px">
+                         <option value="0">-Select-</option>           
+				    <?php
+				    foreach($clientList as $key=>$values){
+				    ?>
+
+					   <option value="<?php echo $values["clientId"]?>" <?php if(in_array($values["clientId"],$selClients)){echo "selected";} ?>><?php echo $values["clientName"]?></option>
+				
+				    <?php }?>
+                                </select>
+                            </td>
+                    </tr>
+
+		   <td colspan="2"></td>
 					<tr>
                             <td align="right">Project Status<strong style="color:#FE1100;padding-left:5px;">*</strong></td>
                             <td>:</td>
@@ -82,7 +103,8 @@ elseif($_GET['i'] == "0")
 
 	<script language="javascript">	
 		var toValidateElem = {
-			'projectStatus' : new Array('empty',true)		
+			'projectStatus' : new Array('empty',true)
+			'selClients' : new Array('empty',true)		
 		}
 		var toDisplayError = {
 			'empty' : 'Must not be empty'

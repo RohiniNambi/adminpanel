@@ -1,6 +1,7 @@
 
 <?php
 include_once "./includes/class.scaffold.php";
+include_once "./includes/class.projects.php";
 
 if(trim($session_id) == ""){
 	$commonObj->RedirectTo('logout.php');
@@ -29,7 +30,9 @@ $subcatTypeIdList = array();
 foreach($subcategoryList as $sdet){
 	$subcatTypeIdList[$sdet["scaffoldSubCateId"]] = $sdet["scaffoldSubCatName"];
 }
-
+$pjt = new PROJECTS;
+$projectList = $pjt->getActiveProjectList();
+$clientList = $pjt->getClientList();
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
@@ -42,7 +45,7 @@ foreach($subcategoryList as $sdet){
 	</style>
 
 	<style>
-	.multiple_chk {height: 140px; width:  250px; padding: 5px; overflow: auto; font-size:12px; border: 1px solid #ccc;}
+	.multiple_chk {height: 140px; width:  250px; padding: 5px; overflow: auto; font-size:12px;	 border: 1px solid #ccc;}
 	</style>
 
 </head>
@@ -89,7 +92,27 @@ foreach($subcategoryList as $sdet){
 						</select></td>
                     </tr>
                     <tr>
-                            <td align="right">Units<strong style="color:#FE1100;padding-left:5px;">*</strong></td>
+                            <td align="right">Project<strong style="color:#FE1100;padding-left:5px;">*</strong></td>
+                            <td>:</td>
+                            <td><select name="projectId" id="projectId" value="">
+                            	<option value="">-Select-</option>
+                            	<?php foreach($projectList as $val){ ?>
+                            		<option value="<?php echo $val['projectId'];?>"><?php echo $val['projectName'];?></option>
+                            	<?php }?>                                
+						</select></td>
+                    </tr>
+                    <tr>
+                            <td align="right">Client<strong style="color:#FE1100;padding-left:5px;">*</strong></td>
+                            <td>:</td>
+                            <td><select name="clientId" id="clientId" value="">
+                            	<option value="">-Select-</option>
+                            	<?php foreach($clientList as $val){ ?>
+                            		<option value="<?php echo $val['clientId'];?>"><?php echo $val['clientName'];?></option>
+                            	<?php }?>                                
+						</select></td>
+                    </tr>
+                    <tr>
+                    	<td align="right">Units<strong style="color:#FE1100;padding-left:5px;">*</strong></td>
                             <td>:</td>
                             <td><select name="unitId" id="unitId" value="">
                             	<option value="">-Select-</option>
@@ -135,6 +158,8 @@ foreach($subcategoryList as $sdet){
 		var toValidateElem = {
 			'typeId' : new Array('empty',true),
 			'subCatId' : new Array('empty',true),
+			'projectId' : new Array('empty',true),
+			'clientId' : new Array('empty',true),
 			'unitId' : new Array('empty',true),
 			'erection' : new Array('empty',true),
 			'dismantle' : new Array('empty',true),
